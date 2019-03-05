@@ -1,2 +1,3 @@
-# salt-rfc
-Request For Comments
+# Salt Enhancement Proposals
+
+Proposals to Enhance Salt
