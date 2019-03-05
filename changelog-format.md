@@ -21,7 +21,7 @@ be the result of a poorly structured and inconsistent changelog between releases
 [design]: #detailed-design
 
 This RFC standardizes Salt on the 1.0.0 spec of project changelogs outlined at
-keepachangelog.org.
+https://keepachangelog.com/en/1.0.0/
 
 Specifically, it provides for the following principles:
 
