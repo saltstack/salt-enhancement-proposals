@@ -1,7 +1,7 @@
 - Feature Name: More SEP Statuses
 - Start Date: 2019-03-18
 - SEP Status: Draft
-- SEP PR: (leave this empty)
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/6
 - Salt Issue: (leave this empty)
 
 # Summary
@@ -15,8 +15,8 @@ Enhancing SEP statuses
 In discussions about legacy RFCs and existing SEPs, it's become evident that we
 need a few more statuses for our SEPs:
 
-- Abandoned
-- Up for grabs
+- **Abandoned**
+- **Up for Grabs**
 
 The primary motivator is that we have some SEPs (and legacy RFCs) that are generally
 accepted as fundamentally good ideas, but they haven't built up enough momentum
