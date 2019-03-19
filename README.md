@@ -151,7 +151,8 @@ The following diagram may help with the potential paths a SEP may take.
 ![SEP status diagram](diagrams/SEP%20Statuses.svg)
 
 ## Reviewing SEPs
-SaltStack staff will post information about open SEPs to the **#sep** channel
+SaltStack staff will post information about open SEPs to the
+**[#sep](https://saltstackcommunity.slack.com/messages/CGQ5Q6W5A/convo/C7K04SEJC-1552938425.137500/)** channel
 in the community Slack, as well as our community IRC and mailing list on a
 regular basis to encourage discussion.
 
