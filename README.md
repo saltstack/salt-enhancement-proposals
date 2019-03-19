@@ -134,6 +134,8 @@ The below statuses were discussed above:
 In additon, SEPs can be assigned the following statuses:
 - **Withdrawn**: The SEP has been voluntarily withdrawn from consideration.
   stagnated, 
+- **Up for Grabs**: The SEP has been accepted, but nobody is actively working
+  towards its implmentation.
 - **Implemented**: The accepted SEP has been implemented.
 - **Obsolete**: The accepted SEP is no longer relevant due to other changes in
   Salt, but should be considered for re-evaluation. The re-evaluation will be
