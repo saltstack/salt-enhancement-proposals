@@ -157,7 +157,7 @@ in the community Slack, as well as our community IRC and mailing list on a
 regular basis to encourage discussion.
 
 **This SEP process owes its inspiration to the [React RFC process], [Yarn RFC
-process], [Rust RFC process], and [Ember RFC process]**
+process], [Rust RFC process], and [Ember RFC process]**.
 
 [React RFC process]: https://github.com/reactjs/rfcs
 [Yarn RFC process]: https://github.com/yarnpkg/rfcs
