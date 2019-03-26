@@ -98,10 +98,8 @@ releases as follows:
 
 1. Future releases of SaltStack will have a Python 2 deprecation warning.
 2. SaltStack will create packages that will allow for a smooth transition for users.
-3. In accordance with the schedule decided on in this SEP, testing for Python 2
-   will be turned off.
-4. The six library will be removed from SaltStack slowly over time as well as
-   all compat library use.
+3. The six library will be removed from SaltStack slowly time as well as all
+   compat library use.
 5. Existing monolithic installers will move solely to Python 3 only for the
    cutoff release, such as the Windows installer.
  
