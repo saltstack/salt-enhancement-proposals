@@ -1,7 +1,7 @@
-- Feature Name: Python 2 Deprecation Schedule
+- Feature Name: Retiring Python 2 Support
 - Start Date: 2019-03-25
 - SEP Status: Draft
-- SEP PR: (leave this empty)
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/8
 - Salt Issue: (leave this empty)
 
 
@@ -10,14 +10,14 @@
 [summary]: #summary
 
 In light of Python 2.7 reaching its end of life (EOL) on Jan 1st 2020, Python 2
-will be deprecated from SaltStack no earlier then the Sodium release, that is
+will be unsupported by SaltStack no earlier then the Sodium release, that is
 either the Sodium release or a later release.
 
 
 # Motivation
 [motivation]: #motivation
 
-Python 2.7 will reach it’s official end of life (EOL) on [January 1st,
+Python 2.7 will reach its official end of life (EOL) on [January 1st,
 2020](https://devguide.python.org/#branchstatus) and post that, it will no
 longer be supported by its maintainers. Consequently, SaltStack team will
 retire Python 2.7 support in SaltStack.
@@ -32,12 +32,12 @@ language](https://wiki.python.org/moin/Python2orPython3)
 # Design
 [design]: #detailed-design
 
-Python 2 will be deprecated from SaltStack no earlier than the Sodium release
+SaltStack will drop Python 2 support no earlier than the Sodium release
 (tentative release date is Feb 2020), that is either the Sodium release or a
-later release. Keeping in mind SaltStack’s policy of announcing ‘end of
-support’ at least 2 major releases before the intended changes takes place,
-Sodium or a later release has been chosen as a suitable deadline for Python 2
-deprecation.
+later release. Keeping in mind SaltStack's policy of announcing 'end of
+support' at least 2 major releases before the intended changes takes place,
+Sodium or a later release has been chosen as a suitable deadline to drop Python
+2 support.
 
 **Migration:** After carefully evaluating the list of Python 3 versions
 supported by different operating systems and by also considering the EOL for
@@ -67,7 +67,8 @@ versions of Python are supported by pyOpenSSL.
 
 ### Note 3
 
-A future SEP will define a schedule for ongoing depreciation of Python versions as they also reach their end-of-life.
+A future SEP will define a schedule for ongoing depreciation of Python versions
+as they also reach their end-of-life.
 
 ### Note 4
 
@@ -112,8 +113,8 @@ Operating system versions were retrieved
 
 |Operating Systems                          |Sources                         |
 |-------------------------------|-----------------------------|
-|RHEL 6              |https://access.redhat.com/support/policy/updates/errata ‘End of Maintenance Support 2 (Product retirement)’ |
-|RHEL 7              | https://access.redhat.com/support/policy/updates/errata ‘End of Maintenance Support 2 (Product retirement)’ |
+|RHEL 6              |https://access.redhat.com/support/policy/updates/errata 'End of Maintenance Support 2 (Product retirement)' |
+|RHEL 7              | https://access.redhat.com/support/policy/updates/errata 'End of Maintenance Support 2 (Product retirement)' |
 |Amazon Linux 2      | https://aws.amazon.com/amazon-linux-2/faqs/ |
 |SLES 11             | https://www.suse.com/lifecycle/ |
 |SLES 12             | https://www.suse.com/lifecycle/ |
