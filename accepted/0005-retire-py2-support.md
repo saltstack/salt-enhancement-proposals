@@ -1,6 +1,6 @@
 - Feature Name: Retiring Python 2 Support
 - Start Date: 2019-03-25
-- SEP Status: Draft
+- SEP Status: Accepted
 - SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/8
 - Salt Issue: (leave this empty)
 
