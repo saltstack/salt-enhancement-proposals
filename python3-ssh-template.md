@@ -1,7 +1,7 @@
 - Feature Name: Python 3 Only Salt-SSH
 - Start Date: 2019-05-01
 - SEP Status: Draft
-- SEP PR: (leave this empty)
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/11
 - Salt Issue: (leave this empty)
 
 # Summary
