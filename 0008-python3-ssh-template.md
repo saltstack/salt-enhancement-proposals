@@ -52,7 +52,9 @@ on top of this binary they can use the ssh_ext_alternatives feature to include t
 Python Binary Security Releases:
 We will need to monitor and make sure our Python 3 binary and other built libraries are kept up to date
 with any security releases. Since the Python 3 binary will be managed outside of the salt repo we can do
-releases outside of the Salt release cycle to include these new patches and updates quickly.
+releases outside of the Salt release cycle to include these new patches and updates quickly. We will add
+a tool to help monitor if there are vulnerabiltiies in our dependencies. Either [pyup](https://pyup.io) or
+[github security alerts](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)
 
 Python 3 Binary Test Plan:
 We will need to make sure this is thoroughly tested. We will need to ensure that changes to Salt work with
