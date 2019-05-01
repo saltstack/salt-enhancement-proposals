@@ -44,7 +44,8 @@ ssh_ext_alternatives.
 How are we going to build the Python 3 binary?
 We will build the binary statically for both x86_64 and ARM architecture. We will include the x86_64
 binary by default in the Salt-SSH package. If the ARM architecture is detected we will include a warning
-to the user to download the binary from a specific URL if not already downloaded. We will include the
+to the user to download the binary. To make this download or upgrade of the binary easier, a switch/arg
+will be added to the salt-ssh cli tool that will handle this logic for both binaries. We will include the
 required libraries to run salt-call and include the pip binary. If users want to include other dependencies
 on top of this binary they can use the ssh_ext_alternatives feature to include the additional dependencies.
 
