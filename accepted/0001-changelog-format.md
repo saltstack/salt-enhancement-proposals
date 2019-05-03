@@ -1,7 +1,7 @@
 - Feature Name: Standarize on the format of changelogs
 - Start Date: 2019-02-15
-- RFC Status: Approved
-- RFC PR: http://github.com/saltstack/salt-enhancement-proposals/pull/2 
+- SEP Status: Approved
+- SEP PR: http://github.com/saltstack/salt-enhancement-proposals/pull/2 
 
 # Summary
 [summary]: #summary

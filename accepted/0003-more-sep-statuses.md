@@ -1,8 +1,7 @@
 - Feature Name: More SEP Statuses
 - Start Date: 2019-03-18
-- SEP Status: Draft
+- SEP Status: Accepted
 - SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/6
-- Salt Issue: (leave this empty)
 
 # Summary
 [summary]: #summary

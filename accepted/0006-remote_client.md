@@ -1,6 +1,7 @@
 - Feature Name: Remote Client
 - Start Date: 2018-12-24 
-- RFC PR: (leave this empty)
+- SEP Status: Accepted
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/9
 - Salt Issue: (leave this empty)
 
 # Summary
