@@ -110,7 +110,10 @@ document should be updated accordingly.
 
 The SEP author (like any other developer) is welcome to post an implementation
 for review after the SEP has been accepted. However, the author of an SEP is
-not obligated to implement it.
+not obligated to implement it. If the author has no plans to implement the SEP,
+they can indicate on their SEP that the implementation should be considered
+**Up for Grabs**. Alternatively, if no apparent activity has occurred on the
+SEP for two (2) weeks, it will be considered **Up for Grabs**.
 
 If you are interested in working on the implementation for an accepted SEP, but
 cannot determine if someone else is already working on it, feel free to ask
@@ -124,28 +127,39 @@ The below statuses were discussed above:
   ended
 - **Accepted**: The SEP has been approved for future implementation
 - **Rejected**: The SEP has been rejected during discussion phase
+- **Abandoned**: The SEP is fundamentally good idea, but discussion and
+  progress have stagnated for any number of reasons. Progress may be resumed by
+  the original author, or the SEP re-started by a new SEP champion.
 
 In additon, SEPs can be assigned the following statuses:
-- **Withdrawn**: The SEP has been voluntarily withdrawn from consideration
-- **Implemented**: The accepted SEP has been implemented
+- **Withdrawn**: The SEP has been voluntarily withdrawn from consideration.
+  stagnated, 
+- **Up for Grabs**: The SEP has been accepted, but nobody is actively working
+  towards its implmentation.
+- **Implemented**: The accepted SEP has been implemented.
 - **Obsolete**: The accepted SEP is no longer relevant due to other changes in
   Salt, but should be considered for re-evaluation. The re-evaluation will be
   done in a separate SEP. Once the new SEP is opened, the **Obsolete** SEP will
   be considered **Replaced**.
-- **Replaced**: The SEP has been superseded by another SEP
+- **Replaced**: The SEP has been superseded by another SEP.
 
 The SEP's status can be viewed in two ways:
 
 1. In the **Status** entry at the top of the SEP file
 2. Via GitHub labels applied to the SEP's pull request
 
+The following diagram may help with the potential paths a SEP may take.
+
+![SEP status diagram](diagrams/SEP%20Statuses.svg)
+
 ## Reviewing SEPs
-SaltStack staff will post information about open SEPs to the **#sep** channel
+SaltStack staff will post information about open SEPs to the
+**[#sep](https://saltstackcommunity.slack.com/messages/CGQ5Q6W5A/convo/C7K04SEJC-1552938425.137500/)** channel
 in the community Slack, as well as our community IRC and mailing list on a
 regular basis to encourage discussion.
 
 **This SEP process owes its inspiration to the [React RFC process], [Yarn RFC
-process], [Rust RFC process], and [Ember RFC process]**
+process], [Rust RFC process], and [Ember RFC process]**.
 
 [React RFC process]: https://github.com/reactjs/rfcs
 [Yarn RFC process]: https://github.com/yarnpkg/rfcs
