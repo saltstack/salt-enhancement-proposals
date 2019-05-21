@@ -39,6 +39,9 @@ Exceptions:
   a bug or feature it requires 3 approvals before it can be merged.
 - If a test is not included in a bug fix or feature and the author cannot write a test, keep the PR open
   for 3 months with the “Needs Testcase” label.
+  
+Clarifications:
+  - Contributers only need to write test coverage for their specific changes. 
 
 ## Unresolved questions
 [unresolved]: #unresolved-questions
