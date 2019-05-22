@@ -83,8 +83,8 @@ Each working group’s captain will help lead their respective working group.
 - Captains have a 3 successive term limit. Captains can take a gap after their 3 successive terms and come back to be a captain after a gap term
 - Starting from 2nd term working groups, the captains chosen need to have been a participant in at least one working group 
 - Once a captain’s term end and they are no longer the captain of the next term, their merge rights will be rescinded and transferred to new/incoming captain of the working group 
-- Captain’s need to follow the [Merging Guidelines](https://github.com/saltstack/salt-enhancement-proposals/); This is to ensure Salt project grows responsibly. Captain can also give merge access to participants of their working group while ensuring they follow the Merging Guidelines as well 
-- Captain can nominate a Vice Captain for the working group, to help assist during long leave of absence or to share responsibilities. 
+- Captain’s need to follow the [Merging Guidelines](https://github.com/saltstack/salt-enhancement-proposals/); This is to ensure Salt project grows responsibly. 
+- In rare occasions and in consultation with Salt Core team, Captain can nominate a Vice Captain for the working group, to help assist during long leave of absence or to share responsibilities. Captain can also give merge access to said Vice Captain of their working group while ensuring they follow the Merging Guidelines.
 
  
 ### Participant
