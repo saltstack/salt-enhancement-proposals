@@ -27,6 +27,7 @@ All PR requirements
 
 Bug Fix PR requirements:
   - Test Coverage: regression test written to cover bug fix.
+  - Point to the issue the PR is resolving. If there is not an issue one will need to be created.
 
 Feature PR requirements:
   - Test Coverage: tests written to cover new feature.
@@ -46,7 +47,12 @@ Clarifications:
 ## Unresolved questions
 [unresolved]: #unresolved-questions
 
-- Will need to document this if approved and merged.
+- Will need to document this if approved and merged. Documentation needs to include everything specified in
+this SEP and the following details:
+    * Document current test infrastructure and how contributors can mirror the test runs to help troubleshoot
+      test failures
+    * Clarify where the release notes are located and how to determine the version to include in versionadded.
+      If it is still not clear the contributor can include TBD and the reviewer would clarify the version.
 
 # Drawbacks
 [drawbacks]: #drawbacks
