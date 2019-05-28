@@ -1,7 +1,7 @@
 - Feature Name: Working Group
 - Start Date: 2019-05-16
 - SEP Status: Draft
-- SEP PR: (leave this empty)
+SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/12
 - Salt Issue: (leave this empty)
 
 # Summary
