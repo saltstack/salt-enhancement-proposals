@@ -20,7 +20,7 @@ A Working Group is a small group of individuals who come together with a common 
 
 ## Eligibility to participate 
 
-Salt community members are eligible to be part of working group. A community member is one who is interested in working for Salt project exhibited by raising either 1 or more PR(s), issue(s) or a SEPs (Salt Enhancement Proposal) 
+Salt community members are eligible to be part of a working group. A community member is one who is interested in working on the Salt project exhibited by raising either 1 or more PR(s), issue(s) or SEP(s) (Salt Enhancement Proposal).
 
 In addition, working group applicant is a Subject Matter Expert (SME) in areas such as Windows, Cloud, Networking or SSH 
 
