@@ -16,7 +16,7 @@ Salt's first working groups will convene by mid of June 2019. In order to benefi
 
 # Working Groups 
 
-Working Group is a small group of individuals who come together with a common goal and work towards achieving the goal within a predetermined amount of time. It’s an opportunity for Salt community to lead Salt projects and be part of the process in its entirety. 
+A Working Group is a small group of individuals who come together with a common goal and work towards achieving that goal within a predetermined amount of time. It’s an opportunity for Salt community to lead Salt projects and be part of the process in its entirety. 
 
 ## Eligibility to participate 
 
