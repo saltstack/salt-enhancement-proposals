@@ -14,10 +14,6 @@ Engage with Salt community to get feedback on working group
 
 Salt's first working groups will convene by mid of June 2019. In order to benefit the participants of current and future working group as well as those administering them, all the details of working group will be added as a README document in saltstack/salt/community/working-group folder. 
 
-
-# Design
-[design]: #detailed-design
-
 # Working Groups 
 
 Working Group is a small group of individuals who come together with a common goal and work towards achieving the goal within a predetermined amount of time. It’s an opportunity for Salt community to lead Salt projects and be part of the process in its entirety. 
