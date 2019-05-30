@@ -1,7 +1,7 @@
 - Feature Name: Working Group
 - Start Date: 2019-05-16
 - SEP Status: Draft
-- SEP PR: (leave this empty)
+SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/12
 - Salt Issue: (leave this empty)
 
 # Summary
@@ -16,11 +16,11 @@ Salt's first working groups will convene by mid of June 2019. In order to benefi
 
 # Working Groups 
 
-Working Group is a small group of individuals who come together with a common goal and work towards achieving the goal within a predetermined amount of time. It’s an opportunity for Salt community to lead Salt projects and be part of the process in its entirety. 
+A Working Group is a small group of individuals who come together with a common goal and work towards achieving that goal within a predetermined amount of time. It’s an opportunity for Salt community to lead Salt projects and be part of the process in its entirety. 
 
 ## Eligibility to participate 
 
-Salt community members are eligible to be part of working group. A community member is one who is interested in working for Salt project exhibited by raising either 1 or more PR(s), issue(s) or a SEPs (Salt Enhancement Proposal) 
+Salt community members are eligible to be part of a working group. A community member is one who is interested in working on the Salt project exhibited by raising either 1 or more PR(s), issue(s) or SEP(s) (Salt Enhancement Proposal).
 
 In addition, working group applicant is a Subject Matter Expert (SME) in areas such as Windows, Cloud, Networking or SSH 
 
