@@ -12,7 +12,7 @@ Engage with Salt community to get feedback on working group
 # Motivation
 [motivation]: #motivation
 
-Salt's first working groups will convene by mid of June 2019. In order to benefit the participants of current and future working group as well as those administering them, all the details of working group will be added as a README document in saltstack/salt/community/working-group folder. 
+Salt's first working groups will convene by mid of June 2019. In order to benefit the participants of current and future working group as well as those administering them, all the details of working group will be added as a README document in separate repo community. 
 
 # Working Groups 
 
