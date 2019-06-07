@@ -12,17 +12,17 @@ Engage with Salt community to get feedback on working group
 # Motivation
 [motivation]: #motivation
 
-Salt's first working groups will convene by mid of June 2019. In order to benefit the participants of current and future working group as well as those administering them, all the details of working group will be added as a README document in separate repo community. 
+Salt's first working groups will convene by mid-June 2019. In order to benefit the participants of current and future working groups as well as those administering them, all working group details will be added as a README document in the repo `saltstack/community`. 
 
 # Working Groups 
 
-A Working Group is a small group of individuals who come together with a common goal and work towards achieving that goal within a predetermined amount of time. It’s an opportunity for Salt community to lead Salt projects and be part of the process in its entirety. 
+A Working Group is a small group of individuals who come together with a common goal and work towards achieving that goal within a predetermined amount of time. It’s an opportunity for the Salt community to lead Salt projects and be part of the process in its entirety. 
 
 ## Eligibility to participate 
 
 Salt community members are eligible to be part of a working group. A community member is one who is interested in working on the Salt project exhibited by raising either 1 or more PR(s), issue(s) or SEP(s) (Salt Enhancement Proposal).
 
-In addition, working group applicant is a Subject Matter Expert (SME) in areas such as Windows, Cloud, Networking or SSH 
+In addition, a working group applicant is a Subject Matter Expert (SME) in areas such as Windows, Cloud, Networking or SSH 
 
 If you want to lead or be part of a different working group then the ones mentioned above, Salt would be happy to include that as part of initial working groups, provided salt receives enough interest from others to participate. 
 
@@ -100,22 +100,22 @@ Participants form the core of each of the working groups.
 
 ### Facilitator 
 
-Till the working groups mature, Saltstack will facilitate the working group meetings and there will be at least 1 SaltStack facilitator in every working group meeting
+Until the working groups mature, Saltstack will facilitate the working group meetings and there will be at least 1 SaltStack facilitator in every working group meeting
 
 #### Role of Facilitator 
-- Facilitator will work with Salt core team to identify the list of participants, communicate/invite them to working groups 
-- Facilitator will make sure everyone gets a chance to voice their opinions
-- Facilitator will make sure members stick to the goals of the meeting and doesn't get derailed into tangential conversations 
-- Facilitator sets up the monthly working group meetings and invites the right folks 
-- Facilitator makes the agenda clear before every meeting
-- Facilitator takes notes and share the action items after every meeting 
-- Facilitator makes sure working group members needs/interests are met 
+- The Facilitator will work with the Salt core team to identify the list of participants, communicate/invite them to the working groups 
+- The Facilitator will ensure everyone gets a chance to voice their opinions
+- The Facilitator will ensure members adhere to the goals of the meeting and that the meeting doesn't devolve into tangential conversations 
+- The Facilitator sets up the monthly working group meetings and invites the right folks 
+- The Facilitator makes the agenda clear before every meeting
+- The Facilitator takes notes and shares the action items after every meeting 
+- The Facilitator ensures working group members needs/interests are met 
 
 
 ## Benefits of Working Group 
 
 - Active voice and participation in Salt projects 
-- SaltStack will publish the efforts of working groups to broader salt community 
-- SaltStack will work on recognition of the various working groups members in various public platforms. 
-- Participants and Captains will get dedicated working group swag
+- SaltStack will publish the efforts of working groups to the broader Salt community 
+- SaltStack will recognize working groups members in various public platforms. 
+- Participants and Captains will receive dedicated working group swag
 
