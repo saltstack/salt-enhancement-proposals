@@ -38,7 +38,7 @@ Salt will conduct an election to choose the working group members in the followi
 - If Salt doesn’t receive any eligible applicants for captain role, a member of the Salt open/core will be elected to be captain of that working group. 
 
 The rules for the election process are:  
-- Election for the first working group captain will be internal and voting will be done by the salt core team. 
+- Election for the first working group captain will be internal and voting will be done by the Salt core team. 
 - Elections for all subsequent working group captains and members will be voted on by the outgoing members of the current working group
 
 ## Timelines 
@@ -59,7 +59,7 @@ Working Groups will meet once a month for 60 mins. Below are some guidelines for
 
 ## Working Group Structure  
 
-Each member of a working group will fill one of 3 roles: Captain, Participant and Facilitator. 
+Each member of a working group will fill one of 3 roles: captain, participant or facilitator. 
 
 ### Captain
 
@@ -68,7 +68,7 @@ Each working group captain will help lead their respective working group.
 #### Role of Captains
 - The captain helps shepherd a subset of features/critical fixes for a given release
 - The captain will help coordinate other contributors' work in their area
-- The captain will attend monthly working group meetings for their respective working group. SaltStack will set these up, but SaltStack will hold no restriction on any additional meetings the captain may deem necessary 
+- The captain will attend monthly working group meetings for their respective working group. SaltStack will set these up, but SaltStack will hold no restriction on any additional meetings the captain may deem necessary
 
 #### Captain Guidelines
 
@@ -79,7 +79,7 @@ Each working group captain will help lead their respective working group.
 - Starting from 2nd term working groups, the captains chosen need to have been a participant in at least one working group 
 - Once a captain’s term ends and they are no longer captaining the next term, their merge rights will be rescinded and transferred to the new captain of the working group 
 - Single review completed by the captain on the PR will be considered as criteria met to merge the PR (No additional reviews required)
-- The captain must follow the [Merging Guidelines](https://github.com/saltstack/salt-enhancement-proposals/); This is to ensure Salt project grows responsibly. 
+- The captain must follow the [Merge Guidelines](https://github.com/saltstack/salt-enhancement-proposals/); This is to ensure the Salt project grows responsibly. 
 - In rare occasions and in consultation with the Salt Core team, the captain can nominate a vice-captain for the working group, to help assist during a leave of absence or to share responsibilities. The captain can also give merge access to said vice-captain of their working group while ensuring they follow the Merging Guidelines.
 
  
