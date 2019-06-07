@@ -106,10 +106,10 @@ Until the working groups mature, Saltstack will facilitate the working group mee
 - The facilitator will work with the Salt core team to identify the list of participants, communicate/invite them to the working groups 
 - The facilitator will ensure everyone gets a chance to voice their opinions
 - The facilitator will ensure members adhere to the goals of the meeting and that the meeting doesn't devolve into tangential conversations 
-- The facilitator sets up the monthly working group meetings and invites the right folks 
+- The facilitator sets up the monthly working group meetings and invites the appropriate participants
 - The facilitator makes the agenda clear before every meeting
 - The facilitator takes notes and shares the action items after every meeting 
-- The facilitator ensures working group members needs/interests are met 
+- The facilitator ensures the working group members needs/interests are met 
 
 
 ## Benefits of Working Group 
