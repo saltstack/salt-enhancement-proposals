@@ -39,7 +39,8 @@ Salt will conduct an election to choose the working group members in the followi
 
 The rules for the election process are:  
 - Election for the first working group captain will be internal and voting will be done by the Salt core team. 
-- Elections for all subsequent working group captains and members will be voted on by the outgoing members of the current working group
+- Elections for all subsequent working group captains and members will be voted on by the outgoing members of the current working group and Salt core team. 
+- In the event of a tie, [Thomas Hatch](https://github.com/thatch45), Salt project creator, will make the final decision. 
 
 ## Timelines 
 
@@ -55,7 +56,10 @@ Below is the approximate timeline for how long each working group term will last
  T1 is feature freeze date of next major release
 
 
-Working Groups will meet once a month for 60 mins. Below are some guidelines for working group participants, although each of these groups may operate a little differently depending on their needs and workflow.
+## Collaboration 
+Working Groups will meet not less than once a month for 60 mins. The monthly meetings which are set by SaltStack will be recorded and uploaded on Youtube. Meetings are not just restricted to the Working group members and can be attended by any Salt community members. Details of the meeting will be published in the individual working group github page; For example, for Testing working group meeting [check here](https://github.com/saltstack/community/tree/master/working_groups/wg-Testing)  
+
+Below are some guidelines for working group participants, although each of these groups may operate a little differently depending on their needs and workflow.
 
 ## Working Group Structure  
 
