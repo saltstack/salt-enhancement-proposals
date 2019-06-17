@@ -33,7 +33,7 @@ Feature PR requirements:
   - Test Coverage: tests written to cover new feature.
   - Release Notes: Add note in release notes of new feature for relative release.
   - Add `.. versionadded:: <release>` to module's documentation
-
+  
 Exceptions:
 - Documentation changes do not require test coverage.
 - If an exception needs to be made around the requirement for tests passing or writing a test alongside
@@ -43,6 +43,9 @@ Exceptions:
   
 Clarifications:
   - Contributers only need to write test coverage for their specific changes. 
+  
+Requirements for Merge Access:
+  - Two factor authentication is required for any user with merge access.
 
 ## Unresolved questions
 [unresolved]: #unresolved-questions
