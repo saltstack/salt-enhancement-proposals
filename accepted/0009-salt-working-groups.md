@@ -1,7 +1,7 @@
 - Feature Name: Working Group
 - Start Date: 2019-05-16
-- SEP Status: Draft
-SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/12
+- SEP Status: Accepted
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/12
 - Salt Issue: (leave this empty)
 
 # Summary
@@ -48,7 +48,7 @@ Based on the applications submitted, Salt chooses the final working group member
 
 Below is the approximate timeline for how long each working group term will last. The actual timeline may differ. For example, the Testing and Release Working Group might decide to convene immediately after a major release and dissolve after the next major release. 
 
-![Working Group Timelines](./diagrams/Working-group-timelines.svg)
+![Working Group Timelines](../diagrams/Working-group-timelines.svg)
 
 
 
