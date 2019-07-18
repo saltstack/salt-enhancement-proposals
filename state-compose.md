@@ -1468,3 +1468,11 @@ and a change dictionary. Some may think of this as a drawback but if the change 
 good data, then it should be possible to generate a good message.
 Ultimately there will be no real costs unless people choose to use this feature and then regret it later.
 There will be no requirement for this feature to be used by anyone.
+
+Also some may object to handling of the changes dictionary, but I think on balance, I've dealt with this
+optimally. I think it's fair to assume that if you ran the operation and tested it, that the changes
+you made were in fact the projected ones. In situations where the actual changes need to be compiled some other way,
+the compose function won't be appropriate. When I originally proposed this on slack, I had the operation return
+a change dictionary on success, but I felt that in too many occasions, in reality what will happen
+is the coder will make the required changes part of the operation data, and the operation would just
+recycle it in its results.
