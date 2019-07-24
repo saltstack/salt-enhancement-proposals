@@ -35,7 +35,8 @@ Feature PR requirements:
   - Add `.. versionadded:: <release>` to module's documentation
   
 Exceptions:
-- Documentation changes do not require test coverage.
+- Changes that do not require writing tests: documentation, cosmetic changes (ex. log.debug -> log.trace), 
+                                             fixing tests, pylint, changes outside of the salt directory.
 - If an exception needs to be made around the requirement for tests passing or writing a test alongside
   a bug or feature it requires 3 approvals before it can be merged.
 - If a test is not included in a bug fix or feature and the author cannot write a test, keep the PR open
@@ -56,6 +57,7 @@ this SEP and the following details:
       test failures
     * Clarify where the release notes are located and how to determine the version to include in versionadded.
       If it is still not clear the contributor can include TBD and the reviewer would clarify the version.
+    * Document when integration tests are more applicable over unit tests.
 
 # Drawbacks
 [drawbacks]: #drawbacks
