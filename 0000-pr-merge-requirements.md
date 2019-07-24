@@ -58,6 +58,7 @@ this SEP and the following details:
     * Clarify where the release notes are located and how to determine the version to include in versionadded.
       If it is still not clear the contributor can include TBD and the reviewer would clarify the version.
     * Document when integration tests are more applicable over unit tests.
+    * Document what test coverage still needs to be added.
 
 # Drawbacks
 [drawbacks]: #drawbacks
