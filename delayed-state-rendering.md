@@ -16,3 +16,9 @@ The rest of Salt could benefit from this system too. It isn’t hard to think of
 How delayed rendering is different from slots:
 Slots (currently at least) only runs remote execution calls. Delayed rendering brings with it everything that Jinja typically has in a state, including logic, grains, pillars, `salt`.
 Slots simply returns the result of an execution call. They do not interact with Jinja to allow any logic or parsing.
+
+Examples:
+
+1. Stateful hardware operations whose outcomes are not predictable. For example, writing to disk and then querying for the exact physical location on disk of a file. Writing a file to disk is stateful, but we cannot predict the location of the file on disk.
+1. Any operation that outputs a random string or hash. For example, using a service that creates any kind of account and an UUID
+1. Cloud operations:
