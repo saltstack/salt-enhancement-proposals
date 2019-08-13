@@ -1,0 +1,12 @@
+# SALTSTACK CODE OWNERS
+
+# See https://help.github.com/articles/about-codeowners/
+# for more info about the CODEOWNERS file
+
+# Lines starting with '#' are comments.
+# Each line is a file pattern followed by one or more owners.
+
+# This file uses an fnmatch-style matching pattern.
+
+# Team Core
+*                                   @saltstack/team-core
