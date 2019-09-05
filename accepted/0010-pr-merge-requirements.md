@@ -1,7 +1,7 @@
 - Feature Name: PR Merge Requirements
 - Start Date: 2019-05-21
-- SEP Status: Draft
-- SEP PR: (leave this empty)
+- SEP Status: Accepted
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/13
 - Salt Issue: (leave this empty)
 
 # Summary
