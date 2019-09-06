@@ -1,6 +1,7 @@
 - Feature Name: `worker_cache` (MWorker Cache / If-Modified-Since Cache IMSCache)
 - Start Date: 2019-02-13
-- RFC PR: (leave this empty)
+- SEP status: Abandoned
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/3
 - Salt Issue: (leave this empty)
 
 # Summary
