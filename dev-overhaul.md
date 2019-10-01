@@ -31,7 +31,7 @@ We have missed release deadlines due to the complexity of the Salt release proce
 
 ![Existing strategy](diagrams/old-branch-strategy.png)
 
-The combination of bugfixes, merge forwards, and backports has been difficult to try and keep track of. There have been a number of the community has met a Salt release with confusion - why is this bugfix missing? Why was that feature added in a point release?
+The combination of bugfixes, merge forwards, and backports has been difficult to try and keep track of. There have been a number of Salt releases the community has met with confusion - why is this bugfix missing? Why was that feature added in a point release?
 
 It’s also been difficult for the community to contribute, raising questions such as:
 
