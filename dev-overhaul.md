@@ -29,7 +29,7 @@ We have missed release deadlines due to the complexity of the Salt release proce
 - `2017.7`
 - `2017.7.9`
 
-![Existing strategy](diagrams/old-branch-strategy.png)
+![Existing strategy](diagrams/diagrams_old-branch-strategy.png)
 
 The combination of bugfixes, merge forwards, and backports has been difficult to try and keep track of. There have been a number of Salt releases the community has met with confusion - why is this bugfix missing? Why was that feature added in a point release?
 
@@ -66,7 +66,7 @@ To eliminate the biggest source of confusion and distraction, Salt will adopt th
 
 A new branch, called **master** will be created from **2019.2.1**. Salt core team has spent close to 5 months stabilizing the 2019.2.1 branch. Because 2019.2.1 is stable and tests are already green, rather than repeating the entire process for **develop** or some other branch, PRs from `develop` and `neon` branches will be merged in a controlled manner to ensure **master** (formerly 2019.2.1) continues to stay stable and green.
 
-![A new, more stable approach](diagrams/new-branch-strategy.png)
+![A new, more stable approach](diagrams/diagrams_new-branch-strategy.png)
 
 **Focusing on a single release branch will help us to release better software more often**. In order to maintain this focus, and to meet our desired release cadence **there will be no more point releases on 2017.7.x and 2018.3.x branches and 2017.7.8 and 2018.3.4 will be capstone releases**.
 
