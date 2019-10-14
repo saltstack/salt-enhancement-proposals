@@ -33,7 +33,7 @@ there is only “one way to do it”. Accepting double quotes was extremely
 difficult for Tom, but if he can do it, anyone can.
 
 Salt will also adopt [pre-commit](https://pre-commit.com) in order to automate
-the use of Black and lint. As `pre-commit` runs `black`, `isort` and lint
+the use of Black and lint. As `pre-commit` runs `black`, `isort` (using `force_single_line=True`) and lint
 checks, it will allow us all to focus on the logic and design of the PRs
 which will increase the stability and quality of Salt.
 
