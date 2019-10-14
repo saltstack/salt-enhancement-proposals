@@ -37,6 +37,13 @@ the use of Black and lint. As `pre-commit` runs `black`, `isort` and lint
 checks, it will allow us all to focus on the logic and design of the PRs
 which will increase the stability and quality of Salt.
 
+#### Lint Names
+
+Additionally, on the rare occasion that we need to disable lint rules, we will
+disable based on name, instead of number. The existing disabled lint numbers
+will be changed to the corresponding names as part of the PR that implements
+this SEP. 
+
 ### Git Blame? 
 
 Because the introduction of Black will absolutely touch every file in the
