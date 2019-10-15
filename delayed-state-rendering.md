@@ -3,7 +3,7 @@
 - SEP Status: Draft
 - SEP PR: (leave this empty)
 - Salt Issue: (leave this empty)
-- Author: Joseph Nix, nixjdm at terminallabs dot com, [nixjdm on GitHub](https://github.com/nixjdm)
+- Author: Joseph Nix, nixjdm at terminallabs dot com, [nixjdm@GitHub](https://github.com/nixjdm)
 
 # Summary
 
@@ -54,7 +54,7 @@ my_state2:
 {% end_delayed_block %}
 ```
 
-In this example, `my_state` indicates that `dependant_block_A` will be rendered and its states executed after it finishes. In this way, `delayed_render` can be thought of as a new kind of requisite. It is similar to `require_in` in that it helps determine an order of execution, and indicates what comes later. It is different, in that `delayed_render` determines what will be executed **immediately after** this state. It also does not simply point to another state. Instead, `delayed_render` points to a block of Jinja defined by the custom Jinja tag `delayed_block`.
+In this example, `my_state` indicates that `dependant_block_A` will be rendered and its states executed after it finishes. In this way, `delayed_render` can be thought of as a new kind of requisite. It is similar to `require_in` in that it helps determine an order of execution, and indicates what comes later. It is different, in that `delayed_render` determines what will be executed **immediately after** this state. It also does not simply point to another state. Instead, `delayed_render` points to a block of Jinja defined by the custom Jinja tag `delayed_block`. This block could contain any template code.
 
 Upon initial render of this state (as in a highstate or otherwise), the `delayed_block` Jinja tag effectively cuts all of the text in the block, and stores it in memory on the Salt master, and associates it with the original job. When `my_state1` finishes, the minion calls back to the master, indicating that the `delayed_block` `dependant_block_A` should be rendered, and any states within it executed, on the same minion.
 
@@ -263,6 +263,8 @@ This would be a fairly large and complicated feature to implement. It would have
 This is not a breaking change. Existing setups should run unaffected.
 
 There would probably be several documentation pages that would need to be written or updated. This probably deserves its own page. It also relates to the renderer pages, the requisites page, and pages that talk about the highstate and state system layers.
+
+Using this feature in a highstate will also additionally tax a master more than the same highstate without that `delayed_render`. I do not expect this to be particularly substantial, but it will reduce scalability somewhat. As always, when a user is pushing the limits, testing should be done and design choices made to deal with any scalability issues.
 
 # Postscript
 
