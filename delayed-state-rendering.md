@@ -3,6 +3,7 @@
 - SEP Status: Draft
 - SEP PR: (leave this empty)
 - Salt Issue: (leave this empty)
+- Author: Joseph Nix, nixjdm at terminallabs dot com, [nixjdm on GitHub](https://github.com/nixjdm)
 
 # Summary
 
@@ -31,7 +32,7 @@ We will need a way to indicate
 
 To do this, we add a new requisite called `delayed_render`, that takes a list of things render and execute after the state that has the requisite in it finishes. This list contains either sections enclosed by a custom jinja tag similar to `block` called `delayed_block`, or the names of entire sls files in the same way as given in other requisites.
 
-It is important to note that we don't want to mark a state directly to indicate its render should be delayed. Instead, we want the abillity to mark *jinja* as needing to be rendered later. We don't want to render a single state later - we want to render jinja later that contains a state, or states. Doing this allows for loops, conditionals, [Salt's special context vars like `salt` and `grains`](https://docs.saltstack.com/en/latest/ref/states/vars.html), and the full power of the render machinery. This allows for accessing and building logic around data at delayed render time, that did not exist at the render of the calling state.
+It is important to note that we don't want to mark a state directly to indicate its render should be delayed. Instead, we want the abillity to mark *Jinja* as needing to be rendered later. We don't want to render a single state later - we want to render Jinja later that contains a state, or states. Doing this allows for loops, conditionals, [Salt's special context vars like `salt` and `grains`](https://docs.saltstack.com/en/latest/ref/states/vars.html), and the full power of the render machinery. This allows for accessing and building logic around data at delayed render time, where that data did not exist at the render of the calling state.
 
 Here are several examples of how state files could use this
 
@@ -52,7 +53,7 @@ my_state2:
 {% end_delayed_block %}
 ```
 
-In this example, `my_state` indicates that `dependant_block_A` will be rendered and its states executed after it finishes. In this way, `delayed_render` can be thought of as a new kind of requisite. It is similar to `require_in` in that it helps determin an order of execution. It is different, in that `delayed_render` determines what will be executed **imediately after** this state. It also does not simply point to another state. Instead, `delayed_render` points to a block of Jinja defined by a custom Jinja tag.
+In this example, `my_state` indicates that `dependant_block_A` will be rendered and its states executed after it finishes. In this way, `delayed_render` can be thought of as a new kind of requisite. It is similar to `require_in` in that it helps determin an order of execution, and indicates what comes later. It is different, in that `delayed_render` determines what will be executed **imediately after** this state. It also does not simply point to another state. Instead, `delayed_render` points to a block of Jinja defined by the custom Jinja tag `delayed_block`.
 
 Upon initial render of this state (as in a highstate or otherwise), the `delayed_block` Jinja tag is effectively cuts all of the text in the block, and stores it in memeory on the Salt master, and associates it with the original job. When `my_state1` finishes, the minion calls back to the master, indicating that the `delayed_block` `dependant_block_A` should be rendered, and any states within it executed, on the same minion.
 
@@ -94,7 +95,7 @@ This state must be a precursor to many things. Since `delayed_render` contains a
 
 ## Edge Cases
 
-Since the requisite and delayed render is so generalized, the author can potentially do complicated things.
+Since the requisite and delayed render is so generalized, the user can potentially do complicated things.
 
 ### Nested delayed_renders
 
@@ -188,12 +189,68 @@ This would set the default value to `3`, instead of the typical `1`. This could 
 
 ## Implementation Notes
 
+### General flow
 
+On initial render of a state or set of states (`state.apply` or `state.highstate`), all `delayed_block`s must be scanned for. Their contents should be removed as-is, and stored for later rendering. At this step it doesn't matter at all what the contents are, be it a simple state, complex jinja, a nested `delayed_block`, or even unrenderable Jinja or Yaml. The initial render will execute until the minion hits a `delay_render` callback requisite. When that happens, the minion pauses it's chain of state executions and calls back to the master for further instructions. This callback should contain the its parent's job id. E.g. if a highstate contains callbacks, that highstate's jid would be returned in the callback. That way the master has enough information to proceed.
 
+The master then renders the block (or sls), and proceeds to execute what it says. This could nest deeper by using the same process as above. Once the minion completes this set of execution, it can proceed to the next step in the original order of state execution.
+
+Orchestration can use delayed rendering in a similar way. Though orchestraion execution happens on the master, it may still be valuable to delay rendering before continuing to execute certain dependent functions.
+
+### Delayed Blocks
+
+Custom `delayed_block` tags draw their inspiration traditional Jinja `block` tags. As such, their use should be as similar as possible.
+
+#### End Tags
+
+You should also be able to [specify named block end-tags](https://jinja.palletsprojects.com/en/2.10.x/templates/#named-block-end-tags) like `{% end_delayed_block dependant_block_A %}`. Note the traditional end tag is `endblock`. Considering `end_delayed_block` is three words, the additional of underscores seems prudent.
+
+#### Finding blocks
+
+Like traditional `block` tags, you can only reference a block within the same template, or in a Jinja included or extended template. A `delayed_block ` in another template will not be found or used unless that template is included or extended with Jinja.
+
+#### Delayed Scope
+
+Like traditional `block` tags, [delayed_blocks may not access variables from outer scope](https://jinja.palletsprojects.com/en/2.10.x/templates/#block-nesting-and-scope). *Unlike* traditional `block` tags, there is no exception to this. When the minion calls back to the master, it doesn't pass anything that could be added directly to the `delayed_block`'s scope. The master also adds nothing. This could possibly be added in the future, but for no seems like unneeded complexity.
+
+As an extension of this, other requisites cannot traverse the scopes. No requisite from the outer scope can reference a state in the inner scope, and no state in the inner scope can reference a state in the outer scope. It is possible to fanagle a few exceptions to this, but I think would be a great increase in complexity. It is far simpler to have `delayed_block`s "stand on their own".
+
+These scoping rules apply equally to `delayed_sls` files.
+
+### Alternative Renderers
+
+Any renderer that has the ability to add something analogous to a custom template tag in Jinja, can also have `delayed_block`s. Mako, Genshi, and Cheetah should be fine, for instance, though the implementation may look more like function calls than blocks. Specific implementation however, needs work. The Python renderer could also achieve the same effect with a function. For instance, a [pure Python state](https://docs.saltstack.com/en/latest/ref/renderers/all/salt.renderers.py.html#full-example) could include additional functions that, when decorated by `@delayed_block`, could be evaluated in delayed fashion. As a matter of development, Jinja could be the only renderer that offers `delayed_block`s for a while, as other renderers add the feature.
+
+References to `delayed_sls` files should be straight-forward.
 
 ## Alternatives
 [alternatives]: #alternatives
 
+### Slots
+
 How delayed rendering is different from slots:
-Slots (currently at least) only run remote execution calls. Delayed rendering brings with it everything that Jinja typically has in a state, including logic, grains, pillars, `salt`.
-Slots simply returns the result of an execution call. They do not interact with Jinja to allow any logic or parsing.
+Slots (currently at least) only run remote execution calls, potentiall informing a state, but they do not interact with Jinja to allow any logic or parsing.
+
+### Orchestration
+
+The goal of this feature is to have a more powerful highstate. However, as I have done to date, pieces of the would-be highstate can be broken out into separate states, called by orchestration states. Potentially even beacons and reactors. While this works, and makes sense, it was a bit of a let down when I realized that's what I had to do.
+
+## Unresolved questions
+[unresolved]: #unresolved-questions
+
+Finer details of the internal mechanisms could be solidified. I choose to not get too deep into that to leave room for the developers. How alternate renderers could implement this could also be fleshed out further.
+
+# Drawbacks
+[drawbacks]: #drawbacks
+
+This would be a fairly large and complicated feature to implement. It would have real cost in terms of code size, complexity, and touch many parts of the existing code.
+
+This is not a breaking change. Existing setups should run unaffected.
+
+There would probably be several documentation pages that would need to be written / updated. This probably deserves it's own page, in addition to touching the renderer pages, the requisites page, and pages that talk about the highstate and state system layers.
+
+# Postlog
+
+This has been on my mind for about a year. It first occured to me when I was writing cloud orchestration states. I had an orchestration state that spawned a compute instance and then kicked off a highstate. It was simple enough. Then I wanted to access and use the public IP address of that compute instance. That was not so easy. Then I found similar problems for other "cloud" operations within a highstate, where I needed to use information I could not set or predict. Finally, I realized that this limitation is systemic. It doesn't just apply to cloud operations, though that may be the most frequently encountered limitation. Any state that has an unpredictable effect is currently difficult to incorporate into a streamlined highstate.
+
+I have discussed this topic with Alan Cugler [alan-cugler @GitHub](https://github.com/alan-cugler) and Michael Verhulst [verhulstm @GitHub](https://github.com/verhulstm) several times, and they helped me flesh this out quite a bit.
