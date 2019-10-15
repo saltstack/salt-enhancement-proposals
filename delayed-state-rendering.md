@@ -115,7 +115,7 @@ my_state2:
 {% end_delayed_block %}
 ```
 
-Here, the `delayed_block` tag indicates with the `scoped` positional argument that the Jinja context it has should be included in the delayed render. This will the master additionally saving this context to be reused for that render. This is only applicable to delayed blocks, and not sls files, since the sls files are meant to be stand-alone and not require a prefixing tag.
+Here, the `delayed_block` tag indicates with the `scoped` positional argument that this state's Jinja context  should be included in the delayed render. This means the master will additionally save this context to be reused for that render. This is only applicable to delayed blocks, and not sls files, since the sls files are meant to be stand-alone and not require a prefixing tag.
 
 ### Multiple delayed_renders
 
@@ -265,9 +265,9 @@ Like traditional `block` tags, [delayed_blocks may not access variables from out
 
 Other requisites cannot traverse the scopes. No requisite from the outer scope can reference a state in the inner scope, and no state in the inner scope can reference a state in the outer scope. It is possible to fanagle a few exceptions to this, but it could greatly increase complexity.
 
-Because the YAML of the inner scope is isolated, the same state id can be reused. Take the example in the [Repeated Renders](#repeated-renders) section as an example. In that example, each delayed render is rendered and executed in isolation, yet the state declaration is the same each time. There is no conflict because of the isolated YAML scopes. Each delayed render state can also still be uniquely identified by associaating it with its parent state, that caused its render.
+Because the YAML of the inner scope is isolated, the same state id can be reused. Take the example in the [Repeated Renders](#repeated-renders) section as an example. In that example, each delayed render is rendered and executed in isolation, yet the state declaration is the same each time. There is no conflict because of the isolated YAML scopes. Each delayed render state can also still be uniquely identified by associating it with its parent state, that caused its render.
 
-These scoping rules apply equally to `delayed_sls` files, with the excpetion that `scoped` does not exist for `delayed_sls` files.
+These scoping rules apply equally to `delayed_sls` files, with the exception that `scoped` does not exist for `delayed_sls` files.
 
 Finally, delayed renders always have the return dict of the state that called it as `prev_ret`, accessible in it's Jinja context.
 
@@ -305,10 +305,10 @@ This is not a breaking change. Existing setups should run unaffected.
 
 There would probably be several documentation pages that would need to be written or updated. This probably deserves its own page. It also relates to the renderer pages, the requisites page, and pages that talk about the highstate and state system layers.
 
-Using this feature in a highstate will also additionally tax a master more than the same highstate without that `delayed_render`. This will probably not be particularly substantial, but it will reduce scalability somewhat. As always, when a user is pushing the limits, testing should be done and design choices made to deal with any scalability issues.
+Using this feature in a highstate will also tax a master more than the same highstate without using this feature. This will probably not be particularly substantial, but it will reduce scalability somewhat. As always, when a user is pushing the limits, testing should be done and design choices made to deal with any scalability issues.
 
 # Postscript
 
 This has been on my mind for about a year. It first occurred to me when I was writing cloud orchestration states. I had an orchestration state that spawned a compute instance and then kicked off a highstate. It was simple enough. Then I wanted to access and use the public IP address of that compute instance. That was not so easy. Then I found similar problems for other "cloud" operations within a highstate, where I needed to use information I could not set or predict. Finally, I realized that this limitation is systemic. It doesn't just apply to cloud operations, though that may be the most frequently encountered limitation. Any state that has an unpredictable effect that then needs to be used is currently difficult to incorporate into a streamlined highstate.
 
-I have discussed this topic with Alan Cugler [alan-cugler@GitHub](https://github.com/alan-cugler), Michael Verhulst [verhulstm@GitHub](https://github.com/verhulstm), and Jason Traub [jtraub91@GitHub](https://github.com/alan-cugler) several times, and they helped me flesh this out quite a bit.
+I have discussed this topic with Alan Cugler [alan-cugler@GitHub](https://github.com/alan-cugler), Michael Verhulst [verhulstm@GitHub](https://github.com/verhulstm), and Jason Traub [jtraub91@GitHub](https://github.com/alan-cugler) several times, and they helped me flesh this out quite a bit. I also am aware, via Michael who attented the most recent salt-cloud working group meeting, that Tom Hatch is at least thinking on similar lines. Hopefully that means I'm not crazy!
