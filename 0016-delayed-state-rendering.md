@@ -1,7 +1,7 @@
 - Feature Name: Delayed State Rendering
 - Start Date: 2019-06-21
 - SEP Status: Draft
-- SEP PR: (leave this empty)
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/22
 - Salt Issue: (leave this empty)
 - Author: Joseph Nix, nixjdm at terminallabs dot com, [nixjdm@GitHub](https://github.com/nixjdm)
 
