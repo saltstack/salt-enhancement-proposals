@@ -1,7 +1,7 @@
 - Feature Name: blackened-seasoning
 - Start Date: 2019-10-04
 - SEP Status: Draft
-- SEP PR: (leave this empty)
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/21
 - Salt Issue: (leave this empty)
 
 # Summary
