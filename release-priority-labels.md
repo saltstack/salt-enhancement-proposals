@@ -1,10 +1,17 @@
+- Feature Name: release-label-improvements
+- Start Date: 2020-01-13
+- SEP Status: Draft
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/24
+
 # Summary
+[summary]: #summary
 
 The current GitHub labels are complicated and not very intuitive. This SEP is
 designed to simplify the way we use labels to track what should make it into a
 release, and clarify the high-level purpose of specific labels.
 
 # Motivation
+[motivation]: #motivation
 
 In community and internal discussions regarding labels, it's become clear that
 we need a more streamlined approach to labels and their release priority.
@@ -24,6 +31,7 @@ exhaustive list of criteria for labels. It also does not attempt to address the
 entire development and triage process.
 
 # Design
+[design]: #detailed-design
 
 Based on the discussions we've had, there are three main perspectives that are
 confused about our current labels in regards to the release process.
@@ -76,19 +84,20 @@ These labels will replace the following labels:
 - P3
 - P4
 
-# Alternatives
+## Alternatives
+[alternatives]: #alternatives
 
-## Keep It Up
+### Keep It Up
 
 We could keep doing what we’ve been doing, and simply do better at publicizing
 / documenting the changes.
 
-## Different Colors of Bikeshed
+### Different Colors of Bikeshed
 
 We could use other label names, such as “Critical”, “Major”, “Minor”,
 “Cosmetic”.
 
-# Unresolved Questions
+## Unresolved questions
 
 Do we need visibility labels, meaning something to replace P1, P2, P3, P4? For
 example, High Visibility (many or most Salt users will see it), Medium
@@ -96,6 +105,7 @@ Visibility (some), Low Visibility (few people will see it). This measure is
 somewhat subjective, though visibility could help in prioritizing the backlog.
 
 # Drawbacks
+[drawbacks]: #drawbacks
 
 We have to update documentation and re-train ourselves. But even with current
 documentation, it seems like there are enough complications that we *still*
