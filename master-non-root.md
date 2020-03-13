@@ -33,6 +33,7 @@ Salt master should be installed an run unpriviliged.
 Installation scripts should install it as the proper user, chmod the proper directories etc.
 
 
+
 ## Alternatives
 [alternatives]: #alternatives
 
@@ -40,6 +41,13 @@ To get a secured by default installation, I don't think there are any alternativ
 
 ## Unresolved questions
 [unresolved]: #unresolved-questions
+
+How to handle loading of configuration files has to be addressed.
+
+I see multiple possible sollutions for this.
+A) We can start salt-master as an unpriviledged user, and that unpriviledged user has read access to the configuration files via group read permissions.
+B) We can start salt-master as root, and let the application fallback to an unpriviledged users after reading the configuration files. (similar to what nginx for example does)
+
 
 
 # Drawbacks
