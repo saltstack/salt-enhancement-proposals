@@ -14,7 +14,6 @@ Salt-master by default, runs as root user and salt documents how you can run sal
 
 This is the wrong way around.  It should run as non-root by default. And document when/why/how you can run it as root.
 
-
 If I read the documentation correctly its PAM external auth that breaks when running as non-root (https://github.com/saltstack/salt/issues/7762)
 If that really cannot be fixed in salt, then the Salt PAM external auth documentation should mention how you can change your salt installation to run as root.
 
@@ -25,9 +24,6 @@ Brief explanation of the feature.
 
 Filed as SEP as suggested by Ch3LL in https://github.com/saltstack/salt/issues/55886
 
-Its 2020. The days of "meh, let's just run as root and leave it to the user to sort it out if they want to run unprivileged". It should be unprivileged by default ! Lots of other software does it (e.g. Postfix) so there's no reason for Salt not to.
-
-As a busy sysadmin, one should not be forced to read the docs and jump through hoops in order to switch to unprivileged. Its an un-necessary waste of time. It should be the other way around, if I want to run as root, then I should be forced to jump through hoops.
 
 # Design
 [design]: #detailed-design
@@ -40,7 +36,7 @@ Installation scripts should install it as the proper user, chmod the proper dire
 ## Alternatives
 [alternatives]: #alternatives
 
-Its 2020, I don't think there are any alternatives.
+To get a secured by default installation, I don't think there are any alternatives.
 
 ## Unresolved questions
 [unresolved]: #unresolved-questions
