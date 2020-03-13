@@ -1,7 +1,7 @@
 - Feature Name: [security] run salt-master non-root by default
 - Start Date: 2020-02-28
 - SEP Status: Draft
-- SEP PR: (leave this empty)
+- SEP PR: 25
 - Salt Issue: (leave this empty)
 
 # Summary
