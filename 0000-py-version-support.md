@@ -16,14 +16,13 @@ with Python's End of Life schedule.
 
 Documentation and Communication
 -------------------------------
-One of the motivating factors around this policy change is to make it more clear what our Python
-version support is for each Salt releases. If it is clearly defined, then packagers, community members,
-and Salt users will know when a Python version will be dropped for a given Salt release.
-In the past we had never clearly defined how our Python version support lined up with Python's
-End of Life schedule. We previously made a best effort to support the Python versions that lined
-up with the operating systems Python versions, but never clearly defined this and did not always
-follow this in every case. For example, when we dropped Python 2.6 support we still supported
-Redhat 6, which had Python 2.6 installed by default. To continue supporting Redhat 6 while also
+One of the motivating factors around this policy change is to clarify our Python version support
+for each Salt release. If it is clearly defined, then packagers, community members, and Salt users will
+know when a Python version will be dropped for a given Salt release. In the past we had never clearly
+defined how our Python version support lined up with Python's End of Life schedule. We previously made a
+best effort to support the Python versions that lined up with the operating systems Python versions, but never clearly
+defined this and did not always follow this in every case. For example, when we dropped Python 2.6 support
+we still supported Redhat 6, which had Python 2.6 installed by default. To continue supporting Redhat 6 while also
 removing support for the End of Life Python 2.6 version, we included Python 2.7 in our packages
 for that operating system.
 
@@ -57,8 +56,16 @@ What if a Python version drops support relatively close to a Salt Release?
 --------------------------------------------------------------------------
 We may drop support for a Python version if the End of Life date lands relatively close to a Salt release.
 For example if a Python version is End of Life a couple weeks before a Salt release, support for that
-Python version may drop in that Salt version. This will need to be clearly communicated beforehand
-with the community.
+Python version may drop in that Salt version. We will need to communicate and decide when a Python version
+is dropped at the beginning of a development cycle.
+
+What about new Python versions?
+-------------------------------
+At the beginning of a development cycle for each feature release, not only do we need to align
+with the Python versions that will become End of Life, but also new Python versions that will need
+to be added. Tests running against the new Python version will need to be added and run on the
+master branch. Any issues found will need to have issues created and assigned out for the
+scheduled release.
 
 How will this impact the Sodium release?
 ----------------------------------------
@@ -66,7 +73,7 @@ Because Python 3.4 became End Of Life on 2019-03-18, we will only support Python
 
 How does this impact all supported Operating Systems
 ----------------------------------------------------
-The details below will include the impact for our supported operating systmes included here
+The details below will include the impact for our supported operating systems included here
 and some future operating systems we will be supporting:
 http://get.saltstack.com/rs/304-PHQ-615/images/SaltStack-Supported-Operating-Systems.pdf
 
@@ -79,7 +86,7 @@ so they will include the correct Python version.
 Windows
 -------
 Python does not come pre-installed on Windows operating systems. We have always included
-the Python binary in the package and will include to do that going forward. If someone
+the Python binary in the package and will continue to do that going forward. If someone
 wants to pip install Salt onto windows they will need to install a supported Python version
 first, just as they always have. In the case for the Sodium release this will mean they
 will need to install Python >=3.5
@@ -88,9 +95,9 @@ OSX
 ---
 Apple does not clearly state when their operating systems become End of Life, but they do
 always support the three latest versions of OSX. We can estimate these End of Life on some of the
-operating systems based on when the latest ones released. The dates included in the table
+operating systems based on when the latest one is released. The dates included in the table
 below are not confirmed by Apple and are estimates to help determine how this policy will
-affect macosx.
+affect macOS.
 
 |     OS     |    End of Life      | Default Python |
 |------------|---------------------|----------------|
@@ -106,8 +113,8 @@ need to install Python >= 3.5.
 
 Fedora
 ------
-Fedora releases a new version every 6 months and supports these releases for approximately 13 months
-. Our current support mirrors that of the upstream and they are currently supporting Fedora 30, 31 and
+Fedora releases a new version every 6 months and supports these releases for approximately 13 months.
+Our current support mirrors that of the upstream and they are currently supporting Fedora 30, 31 and
 32. They do not have current EOL dates for these releases yet here:
 https://endoflife.software/operating-systems/linux/fedora
 
@@ -115,15 +122,15 @@ https://endoflife.software/operating-systems/linux/fedora
 |------------|-----------------------------|-----------------|
 |     30     |    TBD (possibly june 2020) |      3.7        |
 |     31     |    TBD (possibly oct 2020)  |      3.7        |
-|     32     |    TBD (possibly apr 2020)  |      3.8        |
+|     32     |    TBD (possibly may 2021)  |      3.8        |
 
 Based off of these dates and Python's End of Life dates, Fedora will not
 be of any concern with this change in policy. Fedora releases fairly regularly
 and includes the latest Python version. Both packages and pip installs
 will work against supported Fedora versions going forward.
 
-SLES/OpenSuse
-----
+SLES/openSUSE
+-------------
 The General End of Life dates do conflict with the current Python Version
 End of Life dates. Since Suse does the packaging here they have been informed
 of this policy change and will include a resolution around this with their packages
@@ -144,14 +151,14 @@ Other Linux
 |     Debian 9      |    June 2022     |  2.7, 3.5  |
 |     Debian 10      |    June 2024    |  2.7, 3.7  |
 
-Based on this chart above all of these Operating Systems will or already have conflicted with
-the Python's End of Life Support dates. We will need to include Python in our packages for these
+Based on the chart above all of these Operating Systems will or already have conflicted with
+Python's End of Life Support dates. We will need to include Python in our packages for these
 Operating Systems especially at any given time when their default Python version is considered
 End of Life. This does impact users who would want to pip install Salt. They will need to install
 a newer version of Python before they can install Salt.
 
-Other Reasonable-Effor Support Linux
-------------------------------------
+Other Reasonable-Effort Supported Operating Systems
+---------------------------------------------------
 
 Arch
 ----
@@ -188,7 +195,7 @@ the following libraries that will not support Python 3, which will impact some S
          salt/modules/vboxmanage.py, salt/utils/virtualbox.py,
          salt/cloud/clouds/virtualbox.py)
 
-Both of these projects have not had commits recently added to the project in years. This will need to be documented
+Both of these projects have not had commits added to the project in years. This will need to be documented
 for the Sodium release to make it clear that these modules will not work unless the upstream projects add
 Python 3 support.
 
@@ -212,7 +219,7 @@ Salt User
 If a Salt user is using the packages from https://repo.saltstack.com they will not be affected
 as the Python binary will be included in the package. If they are pip installing the package and
 their operating system Python version is an End of Life Python version they will need to upgrade
-they're Python version before being able to pip install Salt.
+their Python version before being able to pip install Salt.
 
 Users creating their own packages
 ---------------------------------
@@ -220,9 +227,9 @@ If a user creates their own packages they will only be impacted if they are pack
 system that includes an End of Life Python Version. They would need to either create their packages using
 salt-bin or include a supported version of Python in their packages.
 
-When will this happen
----------------------
-This Python Version Support change will go into affect as soon as its approved, but will first impact
+When will this happen?
+----------------------
+This Python Version Support change will go into affect as soon as it is approved, but will first impact
 the Sodium Release. The Sodium Release is due to be released in June and will support Python versions >= 3.5.
 
 ## Alternatives
