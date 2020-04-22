@@ -91,10 +91,10 @@ wants to pip install Salt onto windows they will need to install a supported Pyt
 first, just as they always have. In the case for the Sodium release this will mean they
 will need to install Python >=3.5
 
-OSX
----
+macOS
+-----
 Apple does not clearly state when their operating systems become End of Life, but they do
-always support the three latest versions of OSX. We can estimate these End of Life on some of the
+always support the three latest versions of macOS. We can estimate these End of Life on some of the
 operating systems based on when the latest one is released. The dates included in the table
 below are not confirmed by Apple and are estimates to help determine how this policy will
 affect macOS.
@@ -108,7 +108,7 @@ affect macOS.
 
 We have always included the Python binary with the mac packages, so that will not change for
 users that use the mac Python packages. Starting with the Sodium release we will no longer
-support Python 2.7, so if users install Salt on OSX using pip or any other means they will
+support Python 2.7, so if users install Salt on macOS using pip or any other means they will
 need to install Python >= 3.5.
 
 Fedora
@@ -146,7 +146,7 @@ Other Linux
 |     Rhel 8 |    05 May 2029      |      None      |
 |     Ubuntu 16.04  |    April 2021    |    2.7/3.5 |
 |     Ubuntu 18.04  |    April 2023    |    3.6     |
-|     Ubuntu 20.04  |    2030          |    3.8     |
+|     Ubuntu 20.04  |    April 2025    |    3.8     |
 |     Debian 8      |    30 June 2020  |  2.7, 3.4  |
 |     Debian 9      |    June 2022     |  2.7, 3.5  |
 |     Debian 10      |    June 2024    |  2.7, 3.7  |
@@ -209,8 +209,8 @@ dependency is updated to the appropriate Python version.
 
 Salt Contributors
 -----------------
-When a Python Version is dropped any contributions will need to ensure they align with the syntax
-of the lowest supported Python version. These contributors can look at Python's Release Notes for
+When a Python Version is dropped any contributions will need to ensure they align with the
+the lowest supported Python version. These contributors can look at Python's Release Notes for
 details around what is added into a release or removed. For example for Python 3.6
 https://docs.Python.org/3/whatsnew/3.6.html outlines some of the changes and removals added to this version.
 
@@ -218,8 +218,8 @@ Salt User
 ---------
 If a Salt user is using the packages from https://repo.saltstack.com they will not be affected
 as the Python binary will be included in the package. If they are pip installing the package and
-their operating system Python version is an End of Life Python version they will need to upgrade
-their Python version before being able to pip install Salt.
+their operating system Python version is an End of Life Python version that does not align with the
+installed Salt version, they will need to upgrade their Python version before being able to pip install Salt.
 
 Users creating their own packages
 ---------------------------------
@@ -229,13 +229,13 @@ salt-bin or include a supported version of Python in their packages.
 
 When will this happen?
 ----------------------
-This Python Version Support change will go into affect as soon as it is approved, but will first impact
+This Python Version Support change will go into effect as soon as it is approved, but will first impact
 the Sodium Release. The Sodium Release is due to be released in June and will support Python versions >= 3.5.
 
 ## Alternatives
 [alternatives]: #alternatives
 
-- Alternative is to keep supporting insecure Python versions that line up with supported operating systems
+- Alternative is to keep supporting End of Life Python versions that line up with supported operating systems
 
 ## Unresolved questions
 [unresolved]: #unresolved-questions
