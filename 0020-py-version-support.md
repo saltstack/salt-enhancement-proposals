@@ -209,9 +209,16 @@ dependency is updated to the appropriate Python version.
 
 Salt Contributors
 -----------------
-When a Python Version is dropped any contributions will need to ensure they align with the
-the lowest supported Python version. These contributors can look at Python's Release Notes for
-details around what is added into a release or removed. For example for Python 3.6
+When a Python Version is dropped the contributor can now use new features in the lowest supported
+Python version. For example, f-strings were added in Python 3.6 so when our Python version support is updated
+to using >= Python 3.6 a contributor will be able to use f-strings now.
+
+A contributor will also need to be aware of what is deprecated and removed in all supported Python releases when
+making new contributions. For example, in the Python 3.8 release the `macpath` module was removed,
+so a contributor would need to ensure they do not write any new contributions using this module.
+
+A contributor can look at Python's Release Notes for details around what is added into a release or removed.
+For example for Python 3.6
 https://docs.Python.org/3/whatsnew/3.6.html outlines some of the changes and removals added to this version.
 
 Salt User
