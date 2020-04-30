@@ -22,7 +22,7 @@ know when a Python version will be dropped for a given Salt release. In the past
 defined how our Python version support lined up with Python's End of Life schedule. We previously made a
 best effort to support the Python versions that lined up with the operating systems Python versions, but never clearly
 defined this and did not always follow this in every case. For example, when we dropped Python 2.6 support
-we still supported Redhat 6, which had Python 2.6 installed by default. To continue supporting Redhat 6 while also
+we still supported Red hat 6, which had Python 2.6 installed by default. To continue supporting Red hat 6 while also
 removing support for the End of Life Python 2.6 version, we included Python 2.7 in our packages
 for that operating system.
 
@@ -40,7 +40,7 @@ Security and Maintenance Concerns
 The last motivating factor surrounds security and maintenance concerns. Continuing to support an End
 of Life Python version adds additional maintenance around testing and development for each version.
 Supporting these versions also puts users at a security risk, since no more security fixes will be
-submited and released with that Python version if the operating system does not choose to update
+submitted and released with that Python version if the operating system does not choose to update
 it themselves.
 
 # Design
@@ -48,9 +48,9 @@ it themselves.
 
 The design goal of this SEP is to define a clear policy around Salt's Python version support.
 This new policy defines only supporting major Python versions until they reach End of Life. You can see
-the current status of supported Python branches here https://devguide.Python.org/#status-of-Python-branches
+the current status of supported Python branches here https://devguide.python.org/#status-of-Python-branches
 with the associated End Of Life date for each branch. You can also see details about Python versions that
-have already become End Of Life here: https://devguide.Python.org/devcycle/#end-of-life-branches.
+have already become End Of Life here: https://devguide.python.org/devcycle/#end-of-life-branches.
 
 What if a Python version drops support relatively close to a Salt Release?
 --------------------------------------------------------------------------
@@ -71,8 +71,8 @@ How will this impact the Sodium release?
 ----------------------------------------
 Because Python 3.4 became End Of Life on 2019-03-18, we will only support Python versions >= 3.5
 
-How does this impact all supported Operating Systems
-----------------------------------------------------
+How does this impact all supported Operating Systems?
+-----------------------------------------------------
 The details below will include the impact for our supported operating systems included here
 and some future operating systems we will be supporting:
 http://get.saltstack.com/rs/304-PHQ-615/images/SaltStack-Supported-Operating-Systems.pdf
@@ -120,9 +120,9 @@ https://endoflife.software/operating-systems/linux/fedora
 
 |     OS     |    End of Life              |  Default Python |
 |------------|-----------------------------|-----------------|
-|     30     |    TBD (possibly june 2020) |      3.7        |
-|     31     |    TBD (possibly oct 2020)  |      3.7        |
-|     32     |    TBD (possibly may 2021)  |      3.8        |
+|     30     |    TBD (possibly June 2020) |      3.7        |
+|     31     |    TBD (possibly Oct 2020)  |      3.7        |
+|     32     |    TBD (possibly May 2021)  |      3.8        |
 
 Based off of these dates and Python's End of Life dates, Fedora will not
 be of any concern with this change in policy. Fedora releases fairly regularly
@@ -132,18 +132,18 @@ will work against supported Fedora versions going forward.
 SLES/openSUSE
 -------------
 The General End of Life dates do conflict with the current Python Version
-End of Life dates. Since Suse does the packaging here they have been informed
+End of Life dates. Since SUSE does the packaging here they have been informed
 of this policy change and will include a resolution around this with their packages
 when these version conflicts occur.
 
-Other Linux
------------
+Other Linuxes
+-------------
 
 |     OS     |    End of Life      | Default Python |
 |------------|---------------------|----------------|
-|     Rhel 6 |    30 Nov 2020      |      2.6       |
-|     Rhel 7 |    30 Jun 2024      |      2.7       |
-|     Rhel 8 |    05 May 2029      |      None      |
+|     RHEL 6 |    30 Nov 2020      |      2.6       |
+|     RHEL 7 |    30 Jun 2024      |      2.7       |
+|     RHEL 8 |    05 May 2029      |      None      |
 |     Ubuntu 16.04  |    April 2021    |    2.7/3.5 |
 |     Ubuntu 18.04  |    April 2023    |    3.6     |
 |     Ubuntu 20.04  |    April 2025    |    3.8     |
@@ -162,7 +162,7 @@ Other Reasonable-Effort Supported Operating Systems
 
 Arch
 ----
-Arch is a rolling release and is consistantly updating their Python version, so this is not
+Arch is a rolling release and is consistently updating their Python version, so this is not
 of any concern for this policy.
 
 FreeBSD
@@ -185,7 +185,7 @@ a module we would not have this information beforehand. We are now requiring tes
 for PRs so this will help ensure this is caught for those modules, but there are still some modules that do
 not have tests currently.
 
-For the Sodium Release, I installed the libraries from anything defined with :depends: in the documentation
+For the Sodium Release, I installed the libraries from anything defined with `:depends:` in the documentation
 and the requirements defined in our requirements directory. Once these were installed I ran
 this tool https://pypi.org/project/checkmyreqs/ against all installed Python libraries. This brought to light
 the following libraries that will not support Python 3, which will impact some Salt components:
@@ -214,12 +214,12 @@ Python version. For example, f-strings were added in Python 3.6 so when our Pyth
 to using >= Python 3.6 a contributor will be able to use f-strings now.
 
 A contributor will also need to be aware of what is deprecated and removed in all supported Python releases when
-making new contributions. For example, in the Python 3.8 release the `macpath` module was removed,
+making new contributions. For example, in the Python 3.8 release the macpath module was removed,
 so a contributor would need to ensure they do not write any new contributions using this module.
 
 A contributor can look at Python's Release Notes for details around what is added into a release or removed.
 For example for Python 3.6
-https://docs.Python.org/3/whatsnew/3.6.html outlines some of the changes and removals added to this version.
+https://docs.python.org/3/whatsnew/3.6.html outlines some of the changes and removals added to this version.
 
 Salt User
 ---------
