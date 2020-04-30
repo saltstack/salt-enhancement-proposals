@@ -22,7 +22,7 @@ know when a Python version will be dropped for a given Salt release. In the past
 defined how our Python version support lined up with Python's End of Life schedule. We previously made a
 best effort to support the Python versions that lined up with the operating systems Python versions, but never clearly
 defined this and did not always follow this in every case. For example, when we dropped Python 2.6 support
-we still supported Red hat 6, which had Python 2.6 installed by default. To continue supporting Red hat 6 while also
+we still supported Red Hat 6, which had Python 2.6 installed by default. To continue supporting Red Hat 6 while also
 removing support for the End of Life Python 2.6 version, we included Python 2.7 in our packages
 for that operating system.
 
