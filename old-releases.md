@@ -21,9 +21,10 @@ would leave many stranded while trying to upgrade to later versions and is
 therefore not viable either. This leaves us with the approach of moving the
 older, unsupported versions to an archive location. In examining this, we
 assessed other open projects and their approach to older, unsupported releases.
-We found many following the same proposed approach that we have in this SEP. An
-example is Ubuntu, which makes this distinction easy by using two separate
-domain names: old-releases.ubuntu.com and archive.ubuntu.com. We should emulate
+We found many following the same proposed approach that we have in this SEP.
+Examples include Ubuntu and Debian, which make this distinction easy by using
+two separate domain names: old-releases.ubuntu.com and archive.ubuntu.com for
+Ubuntu, and archive.debian.org and deb.debian.org for Debian. We should emulate
 their behavior by moving our old unsupported releases to a separate URL.
 
 On the same note, unsupported PyPi releases should also be moved to a static
@@ -43,7 +44,7 @@ costs for them and SaltStack.
 # Design
 [design]: #detailed-design
 Whenever a major release goes out of CVE support, we will move the contents to
-https://old-releases.repo.saltstack.com, for example:
+https://archive.repo.saltstack.com, for example:
 
 ```
 https://repo.saltstack.com/yum/redhat/7/x86_64/2018.3/
@@ -51,7 +52,7 @@ https://repo.saltstack.com/yum/redhat/7/x86_64/2018.3/
 would move to
 
 ```
-https://old-releases.repo.saltstack.com/yum/redhat/7/x86_64/2018.3/
+https://archive.repo.saltstack.com/yum/redhat/7/x86_64/2018.3/
 ```
 and all of the point releases under
 
@@ -61,12 +62,12 @@ https://repo.saltstack.com/yum/redhat/7/x86_64/archive/
 that are part of that major release would move to
 
 ```
-https://old-releases.repo.saltstack.com/yum/redhat/7/x86_64/archive/
+https://archive.repo.saltstack.com/yum/redhat/7/x86_64/archive/
 ```
 
 If a point release is affected by a CVE that is part of a major supported
 branch, that point release will also be moved to
-https://old-releases.repo.saltstack.com. For example,
+https://archive.repo.saltstack.com. For example,
 
 ```
 https://repo.saltstack.com/yum/redhat/7/x86_64/archive/3000/
@@ -74,16 +75,15 @@ https://repo.saltstack.com/yum/redhat/7/x86_64/archive/3000/
 was affected by the recent CVE so it would be moved to
 
 ```
-https://old-releases.repo.saltstack.com/yum/redhat/7/x86_64/archive/3000/
+https://archive.repo.saltstack.com/yum/redhat/7/x86_64/archive/3000/
 ```
 
 This would mean someone using the bootstrap script would have to specify `-R
-old-releases.repo.saltstack.com` if they wanted to install an
-unsupported/insecure release.  Other methods of installation would also require
-updating the URL with the new domain name.
+archive.repo.saltstack.com` if they wanted to install an unsupported/insecure
+release.  Other methods of installation would also require updating the URL
+with the new domain name.
 
-https://old-releases.repo.saltstack.com will be S3 syncable just like the main
-repo.
+https://archive.repo.saltstack.com will be S3 syncable just like the main repo.
 
 We will add a notice to the main page of repo.saltstack.com explaining this
 behavior.
@@ -124,5 +124,5 @@ for comments from May 20-26, 2020. The detailed timeline is below:
   https://repo.saltstack.com/yum/redhat/salt-repo-2015.5-1.el5.noarch.rpm which
   may inconvenience people who would like to use them.
 - We would have to update documentation describing the new behavior.
-- It will take effort for someone to move unsupported versions to the
-  old-releases domain name.
+- It will take effort for someone to move unsupported versions to the archive
+  domain name.
