@@ -19,10 +19,10 @@ effort standpoint, the option to update is simply not viable and would set the
 project back considerably. The option to completely remove the older packages
 would leave many stranded while trying to upgrade to later versions and is
 therefore not viable either. This leaves us with the approach of moving the
-older, unsupported version to an archive location. In examining this, we
+older, unsupported versions to an archive location. In examining this, we
 assessed other open projects and their approach to older, unsupported releases.
 We found many following the same proposed approach that we have in this SEP. An
-example is Ubuntu, which makes this distinction easy by using two seperate
+example is Ubuntu, which makes this distinction easy by using two separate
 domain names: old-releases.ubuntu.com and archive.ubuntu.com. We should emulate
 their behavior by moving our old unsupported releases to a separate URL.
 
@@ -80,17 +80,18 @@ https://old-releases.repo.saltstack.com/yum/redhat/7/x86_64/archive/3000/
 This would mean someone using the bootstrap script would have to specify `-R
 old-releases.repo.saltstack.com` if they wanted to install an
 unsupported/insecure release.  Other methods of installation would also require
-updating the url with the new domain name.
+updating the URL with the new domain name.
 
-https://old-releases.repo.saltstack.com will be s3 syncable just like the main repo.
+https://old-releases.repo.saltstack.com will be S3 syncable just like the main
+repo.
 
-We will add a notice to the mainpage of repo.saltstack.com explaining this
+We will add a notice to the main page of repo.saltstack.com explaining this
 behavior.
 
 With regards to the source tarballs hosted on PyPi, we will host them on a web
-server and they will be available on a static HTML page. The reason to do this
-instead of hosting our own PyPi server is to make it explicit, and not easy, to
-install older versions.
+server and they will be made available on a static HTML page. The reason to do
+this instead of hosting our own PyPi server is to make it explicit, and not
+easy, to install older versions.
 
 ### Communication Plan and Timeline
 We are sharing this SEP via Slack, IRC, and the Salt-Users and Salt-Announce
