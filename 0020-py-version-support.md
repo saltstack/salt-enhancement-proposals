@@ -29,7 +29,7 @@ for that operating system.
 Including Python in Packages
 ----------------------------
 Another motivating factor to make this policy change is our shift to including Python in our
-packages. For the Sodium release we will be using salt-bin (https://github.com/saltstack/salt-bin) to
+packages. For the Sodium release we will be using pop-build (https://gitlab.com/saltstack/pop/pop-build/) to
 package for our Fully Supported Platforms.
 (http://get.saltstack.com/rs/304-PHQ-615/images/SaltStack-Supported-Operating-Systems.pdf)
 This will allow us to easily continue supporting operating systems that include End of Life Python
