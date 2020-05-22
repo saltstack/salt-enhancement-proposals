@@ -1,8 +1,8 @@
 - Feature Name: Python Version Support
 - Start Date: 2020-03-24
-- SEP Status: Draft
-- SEP PR: (leave this empty)
-- Salt Issue: (leave this empty)
+- SEP Status: Accepted
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/26
+- Salt Issue: N/A
 
 # Summary
 [summary]: #summary
