@@ -102,9 +102,9 @@ this SEP is urgent and running on an expedited timeline. The SEP will be open
 for comments from May 20-26, 2020. The detailed timeline is below:
 - May 20, 2020: SEP Announcement
 - May 21, 2020: SEP discussion during the Community Open Hour
-- May 26, 2020: SEP closed to comments
-- May 27, 2020: SEP closes
-- June 1, 2020: Unsupported releases moved to separate URL
+- May 29, 2020: SEP closed to comments
+- June 1, 2020: SEP closes
+- June 8, 2020 or later: Unsupported releases moved to separate URL
 
 ## Alternatives
 [alternatives]: #alternatives
