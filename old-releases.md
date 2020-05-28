@@ -126,3 +126,8 @@ for comments from May 20-26, 2020. The detailed timeline is below:
 - We would have to update documentation describing the new behavior.
 - It will take effort for someone to move unsupported versions to the archive
   domain name.
+- People pinning to minor releases on repo.saltstack.com may have unexpected
+  404 errors when we move the insecure release to archive.repo.saltstack.com
+  depending on the timeline of transition and whether they are aware of the CVE
+  release.  We recommend pinning to the major or latest release to avoid that
+  issue.
