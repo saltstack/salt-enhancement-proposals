@@ -1,8 +1,7 @@
 - Feature Name: move non-supported releases to a separate domain name
 - Start Date: 2020-05-20
-- SEP Status: Draft
-- SEP PR: (leave this empty)
-- Salt Issue: (leave this empty)
+- SEP Status: Accepted
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/28
 
 # Summary
 [summary]: #summary
