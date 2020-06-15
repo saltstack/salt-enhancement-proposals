@@ -7,7 +7,7 @@
 # Summary
 [summary]: #summary
 
-Grains is currently a static component of salt.  We want it to be developed in a more compartmentalize fashion.
+Grains is currently a static component of salt.  We want it to be developed in a more compartmentalized fashion.
 The engineers at saltstack have created kernel-specific projects that functionally replace the grains
 provided by salt with POP.  We propose that this project, codenamed `corn` replaces grains in salt while
 maintaining backwards compatibility.
