@@ -43,7 +43,7 @@ platform -- making salt easier to develop
 - This comprises a complete rewrite of ALL grains.  Backwards compatibility is expected, but we need this to get
 in early so that any unintentional issues can be resolved quickly.
 - Salt releases will be able to pin idem-grain dependencies with each release.
-- Users will be to update their grains implementation to a custom idem-grain version.
+- Users will be able to update their grains implementation to a custom idem-grain version.
 
 ## Alternatives
 [alternatives]: #alternatives
