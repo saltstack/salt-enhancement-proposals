@@ -39,7 +39,7 @@ external POP functions to collect grains.  We need to maintain backwards compati
 - This will resolve many bugs that are open against grains and will migrate those bugs OUT of the salt
 platform -- making salt easier to develop
 - Grains in the new platform are independently and fully tested.
-- Most grains tests will be able to be removed from salt; speeding up it's test suite.
+- Most grains tests will be able to be removed from salt; speeding up its test suite.
 - This comprises a complete rewrite of ALL grains.  Backwards compatibility is expected, but we need this to get
 in early so that any unintentional issues can be resolved quickly.
 - Salt releases will be able to pin idem-grain dependencies with each release.
