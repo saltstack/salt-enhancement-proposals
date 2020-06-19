@@ -1,15 +1,15 @@
 - Feature Name: compartmentalize-grains-via pop
 - Start Date: 2020-06-22
 - SEP Status: Draft
-- SEP PR: (leave this empty)
-- Salt Issue: (leave this empty)
+- SEP PR: https://github.com/saltstack/salt/pull/57681
+- Salt Issue: https://github.com/saltstack/salt/issues/57680
 
 # Summary
 [summary]: #summary
 
 Grains is currently a static component of salt.  We want it to be developed in a more compartmentalize fashion.
-The engineers at saltstack have created kernel-specific projects that functionally replace the grains
-provided by salt with POP.  We propose that this project, codenamed `corn` replaces grains in salt while
+The engineers at SaltStack have created platform-specific projects that functionally replace the grains
+provided by salt with POP.  We propose that this project, codenamed `grainsv2` becomes available in salt while
 maintaining backwards compatibility.
 
 # Motivation
@@ -25,7 +25,7 @@ This also solves the issue of `core.py` being an unmaintainable monolith.  It al
 to be independently maintained.
 
 Working group leaders and other community members focused on specific platforms can manage the release cycle for
-individual grains projects independently from salt.
+individual idem-platform projects independently from salt.
 
 # Design
 [design]: #detailed-design
@@ -33,17 +33,20 @@ individual grains projects independently from salt.
 Grains are currently created by calling functions in the salt loader.  We would simply need to call
 external POP functions to collect grains.  We need to maintain backwards compatibility with custom user grains.
 
-- All salt grains have already been ported to and tested on the new platform.
-- The new platform has many more features than the salt-grains implementation, but is compatible with salt grains.
+- All salt grains have already been ported to and fully tested on the `grainsv2`.
+- `grainsv2` has many more features than the salt-grains implementation, but is compatible with salt grains.
 - None of the grain names have been changed, but the output of grains is more consistent/complete between platforms.
 - This will resolve many bugs that are open against grains and will migrate those bugs OUT of the salt
 platform -- making salt easier to develop
 - Grains in the new platform are independently and fully tested.
-- Most grains tests will be able to be removed from salt; speeding up it's test suite.
+- Development will freeze on core.py it's tests could be skipped for speed improvements.
 - This comprises a complete rewrite of ALL grains.  Backwards compatibility is expected, but we need this to get
 in early so that any unintentional issues can be resolved quickly.
-- Salt releases will be able to pin idem-grain dependencies with each release.
+- Salt releases will aggressively pin `grainsv2`/idem-platform dependencies with each release.
 - Users will be to update their grains implementation to a custom idem-grain version.
+- The use of `grainsv2` will be gated with a config variable; It will be disabled by default.
+- New development for grains will be done in `grainsv2` projects and core.py will remain static.
+- When `grainsv2` gains maturity in salt on the other side of the gate (and python3.5 is dropped) it will completely replace core.py
 
 ## Alternatives
 [alternatives]: #alternatives
