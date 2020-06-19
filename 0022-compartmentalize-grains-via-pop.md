@@ -33,17 +33,17 @@ individual idem-platform projects independently from salt.
 Grains are currently created by calling functions in the salt loader.  We would simply need to call
 external POP functions to collect grains.  We need to maintain backwards compatibility with custom user grains.
 
-- All salt grains have already been ported to and fully tested on the `grainsv2`.
+- All salt grains have already been ported to `grainsv2`.
 - `grainsv2` has many more features than the salt-grains implementation, but is compatible with salt grains.
 - None of the grain names have been changed, but the output of grains is more consistent/complete between platforms.
 - This will resolve many bugs that are open against grains and will migrate those bugs OUT of the salt
 platform -- making salt easier to develop
-- Grains in the new platform are independently and fully tested.
+- Grains in the new platform are independently fully tested.
 - Development will freeze on core.py and the salt/grains folder.
 - This comprises a complete rewrite of ALL grains.  Backwards compatibility is expected, but we need this to get
-in early so that any unintentional issues can be resolved quickly.
+in early so that any unintentional issues can be reet up a conversation with the relevant parties solved quickly.
 - Salt releases will aggressively pin `grainsv2`/idem-platform dependencies with each release.
-- Users will be to update their grains implementation to a custom idem-grain version.
+- Users will be to update their grains implementation to a custom idem-platform version.
 - The use of `grainsv2` will be gated with a config variable; It will be disabled by default.
 - New development for grains will be done in `grainsv2` projects and core.py will remain static.
 - When `grainsv2` gains maturity in salt on the other side of the gate (and python3.5 is dropped) it will completely replace core.py
