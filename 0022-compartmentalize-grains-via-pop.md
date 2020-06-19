@@ -39,7 +39,7 @@ external POP functions to collect grains.  We need to maintain backwards compati
 - This will resolve many bugs that are open against grains and will migrate those bugs OUT of the salt
 platform -- making salt easier to develop
 - Grains in the new platform are independently and fully tested.
-- Development will freeze on core.py it's tests could be skipped for speed improvements.
+- Development will freeze on core.py and the salt/grains folder.
 - This comprises a complete rewrite of ALL grains.  Backwards compatibility is expected, but we need this to get
 in early so that any unintentional issues can be resolved quickly.
 - Salt releases will aggressively pin `grainsv2`/idem-platform dependencies with each release.
