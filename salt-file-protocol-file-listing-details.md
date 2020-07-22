@@ -21,14 +21,14 @@ The following is the proposal
 ```
 cp.list_master detail=True directories_only=False path=/
 '.':
-   Time: seconds since 1970
+   Time: Unix 64bit epoch time
    ETag: <Maybe a checksum of all the filenames and modification str times>
    Size: <items in directory> or None
    Type: d
 'file1':
-   Time: seconds since 1970
+   Time: Unix 64bit epoch time. Last Modified time.
    ETag: string/checksum
-   Size: int
+   Size: 64bit int big-endian (as per msgpack)
    Type: f(ile) or d(irectory)
 'file2':
    Time: 7483278389
@@ -41,13 +41,14 @@ cp.list_master detail=True directories_only=False path=/
    Size: <items in directory> or None
    Type: d
 'dir1\file3':
-   Time: 6367
+   Time: 6367554432
    ETag: rfejlwjkldggdgfddgthdvhyhyytrfwe
    Size: 9373
    Type: f
 ```
 The following should allow a minion to determine if the files in a directory have changed, and which files have changed.
 
+eTag is a string which must be unique for the file/directory, when a minion fetches the file it should cache the eTag value. Minion does not need to calculate the eTag. If the reported eTag changes the minion knows the file has changed.
 
 ## Unresolved questions
 [unresolved]: #unresolved-questions
@@ -57,4 +58,4 @@ Will this cause any incompatibility issues?
 
 # Drawbacks
 [drawbacks]: #drawbacks
-Their maybe compatibility issues between different versions of salt when introduced. As the salt:// protocol is not version
+There maybe compatibility issues between different versions of salt when introduced. As the salt:// protocol is not versioned
