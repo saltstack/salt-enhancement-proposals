@@ -6,7 +6,7 @@
 
 # Summary
 [summary]: #summary
-cp.list_master does not provide enough information to determine if files on the minion are up to data, and if they should still exits. This proposal is to look into expanding the information available on files and directories. This would lead to cp.get_dir performance improvements.
+cp.list_master does not provide enough information to determine if files on the minion are up to date, and if they should still exits. This proposal is to look into expanding the information available on files and directories. This would lead to cp.get_dir performance improvements.
 
 # Motivation
 [motivation]: #motivation
@@ -19,7 +19,7 @@ By providing more detail information about files and folders it should be possib
 [design]: #detailed-design
 The following is the proposal
 ```
-cp.list_master detail=True directories_only=False path=/
+cp.list_master detail=True directories_only=False path=/ # maybe expand cp.list_master or introduce a new function
 '.':
    Time: Unix 64bit epoch time
    ETag: <Maybe a checksum of all the filenames and modification str times>
