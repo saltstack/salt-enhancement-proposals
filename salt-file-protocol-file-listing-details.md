@@ -50,6 +50,8 @@ The following should allow a minion to determine if the files in a directory hav
 
 eTag is a string which must be unique for the file/directory, when a minion fetches the file it should cache the eTag value. Minion does not need to calculate the eTag. If the reported eTag changes the minion knows the file has changed.
 
+And alternative structure would be nested dictionary instead of the flat dictionary shown above
+
 ## Unresolved questions
 [unresolved]: #unresolved-questions
 
