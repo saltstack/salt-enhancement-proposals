@@ -38,8 +38,6 @@ Definitions
 - External state engine: A salt module that has the ability to execute a group of configurations (I.E Ansible, Chef, Idem)
 - Sub state run: A new key in the return of salt states that allows definitions of external state engine run details
 
-This is the bulk of the SEP. Explain the design in enough detail for somebody familiar
-with the product to understand, and for somebody familiar with the internals to implement. It should include:
 
 How it is used
 --------------
