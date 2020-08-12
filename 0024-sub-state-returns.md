@@ -16,18 +16,18 @@ They will be parsed and printed alongside all the Salt state returns.
 [motivation]: #motivation
 
 Salt has the ability to run Ansible playbooks, Idem SLSs, and Chef cookbooks.
-These "external state engines" run multiple states in their own way and Salt currently
-only reports whether or not external state runs as a whole were run successfully.  
+These "external state engines" run multiple "states" in their own way and Salt currently
+only reports whether or not external state runs as a whole were successful and doesn't report individual changes.  
 I.E Return status of True if an entire Ansible playbook was executed successfully in an ansiblegate state
 
-We want to add the ability for Salt states to have a "sub_state_run", which gives
+We want to add the ability for Salt state returns to have a "sub_state_run" key, which gives
 these external state engines the ability to report the status of each of the "sub states" they
 ran independently, rather than reporting on the status of the entire group of sub states.
 
-The result is that state output will be very clear and verbose, users will be able to see
-exactly which idem state failed in their idem SLS or exactly which cookbooks passed
-or failed in Chef, and exactly which ansible plays were successful when statefully
-executing a playbook.
+The result is that state output will be very clear and verbose.
+Users will be able to see exactly which `idem state` passed/failed in an `idem SLS`,
+exactly which recipes passed/failed in a Chef cookbook, 
+and exactly which ansible plays passed/failed in a playbook 
 
 
 # Design
