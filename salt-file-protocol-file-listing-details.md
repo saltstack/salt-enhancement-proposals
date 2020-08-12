@@ -25,7 +25,7 @@ master should make it possible to reduce the time it takes to sync files between
 the master and the minion. Agreeing on a data structure to return is just the
 first step. This SEP is to investigate what data is required.
 
-# Design
+# Detailed design
 [design]: #detailed-design
 
 The following is the proposal. The following information should be provided for
@@ -81,8 +81,8 @@ dictionary as shown above.
 ## Unresolved questions
 [unresolved]: #unresolved-questions
 
-What salt functions need to be updated?
-Will this cause any incompatibility issues?
+- What salt functions need to be updated?
+- Will this cause any incompatibility issues?
 
 # Drawbacks
 [drawbacks]: #drawbacks
