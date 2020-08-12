@@ -1,4 +1,4 @@
-- Feature Name: Sub State Returns
+- Feature Name: Sub State Runs
 - Start Date: 2020-08-12
 - SEP Status: Draft
 - SEP PR: github.com/saltstack/salt/pull/57993
@@ -7,25 +7,25 @@
 # Summary
 [summary]: #summary
 
-Add the ability for states to have sub state returns.
+Add the ability for states to have sub state runs.
 For example, if you are running a state that runs several external states under a different engine,
 you can now add those external state runs individually to the "sub_state_run" key of the state return.
-They will be parsed and printed alongside the salt state runs.
+They will be parsed and printed alongside all the Salt state returns.
 
 # Motivation
 [motivation]: #motivation
 
-Salt has the ability to run Ansible Playbooks, Idem SLSs, and Chef configurations.
-These "external state engines" run multiple states in their own way and salt currently
-only reports whether or not external state runs as a whole were run successfully
-(I.E Return status of True if an entire Ansible Playbook was executed successfully).
+Salt has the ability to run Ansible playbooks, Idem SLSs, and Chef cookbooks.
+These "external state engines" run multiple states in their own way and Salt currently
+only reports whether or not external state runs as a whole were run successfully.  
+I.E Return status of True if an entire Ansible playbook was executed successfully in an ansiblegate state
 
-We want to add the ability for salt states to have a "sub_state_run", which gives
+We want to add the ability for Salt states to have a "sub_state_run", which gives
 these external state engines the ability to report the status of each of the "sub states" they
 ran independently, rather than reporting on the status of the entire group of sub states.
 
 The result is that state output will be very clear and verbose, users will be able to see
-exactly which idem state failed in their idem SLS or exactly which configurations passed
+exactly which idem state failed in their idem SLS or exactly which cookbooks passed
 or failed in Chef, and exactly which ansible plays were successful when statefully
 executing a playbook.
 
@@ -35,8 +35,8 @@ executing a playbook.
 
 Definitions
 -----------
-- External state engine: A salt module that has the ability to execute a group of configurations (I.E Ansible, Chef, Idem)
-- Sub state run: A new key in the return of salt states that allows definitions of external state engine run details
+- External state engine: A Salt module that has the ability to execute a group of configurations (I.E Ansible, Chef, Idem)
+- Sub state run: A new key in the return of Salt states that allows definitions of external state engine run details
 
 
 How it is used
@@ -44,11 +44,11 @@ How it is used
 Some states can return multiple state runs from an external engine.
 State modules that extend tools like Ansible, Chef, and Idem can run multiple external
 "states" and then return their results individually in the "sub_state_run" portion of their return
-as long as their individual state runs are formatted like salt states with low and high data.
+as long as their individual state runs are formatted like Salt states with low and high data.
 
 For example, the idem state module can execute multiple idem states
 via it's runtime and report the status of all those runs by attaching them to "sub_state_run" in it's state return.
-These sub_state_runs will be formatted and printed alongside other salt states.
+These sub_state_runs will be formatted and printed alongside other Salt states.
 
 Example
 -------
@@ -136,18 +136,18 @@ def test_sub_state_output_check_changes_is_dict(self):
 ## Alternatives
 [alternatives]: #alternatives
 
-The impact of NOT doing this is that when calling Idem SLS, Ansible playbooks, and Chef configurations,
+The impact of NOT doing this is that when calling Idem SLS, Ansible playbooks, and Chef cookbooks,
 The output of state runs will not be verbose and it will not be clear what individual changes
-were made after executing a playbook/sls/configuration.
+were made after executing a playbook/sls/cookbook.
 
 ## Unresolved questions
 [unresolved]: #unresolved-questions
 
 None, the proof of concept is functional, we just to double check with everyone before
-making a change to something as critical to salt as the state engine.
+making a change to something as critical to Salt as the state engine.
 
 # Drawbacks
 [drawbacks]: #drawbacks
 
-Doing this modifies the state return code, a critical part of salt.
+Doing this modifies the state return code, a critical part of Salt.
 If it is done poorly then it could cause unintended grief down the road.
