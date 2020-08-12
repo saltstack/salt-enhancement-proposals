@@ -6,6 +6,7 @@
 
 # Summary
 [summary]: #summary
+
 cp.list_master does not provide enough information to determine if files on the
 minion are up to date, and if they should still exist. This proposal is expand
 the information available about files and directories on the master. This would
@@ -26,6 +27,7 @@ first step. This SEP is to investigate what data is required.
 
 # Design
 [design]: #detailed-design
+
 The following is the proposal. The following information should be provided for
 each item on the file roots on the master.
 ```
@@ -84,5 +86,6 @@ Will this cause any incompatibility issues?
 
 # Drawbacks
 [drawbacks]: #drawbacks
+
 There maybe compatibility issues between different versions of salt when
 introduced. As the ``salt://`` protocol is not versioned
