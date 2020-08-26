@@ -17,10 +17,12 @@ A common problem I have noticed while using salt is that it does not have an obv
 2) Causes workarounds to be made every time this limitation is felt.
 
 To elaborate on point 1:
+
 I understand that salt encourages and enables users to write python more readily than say, ansible, but this is still a daunting task for many devops folk who are more comfortable with the prescribed format of using .sls files to define a custom workflow. Additionally, the way custom modules and states are stashed away under _modules and _states further makes it feel out of place.
 If registers were a global feature it would allow people to use vanilla .sls to create states, orchestrations, and even execution modules that could make decisions based on the output of previous execution steps.
 
 As for point 2:
+
 I believe salt lacking this very fundamental feature manifests as many different symptoms depending on the problem at hand, and as such has had a compounding effect over the years -- spawning many well-meaning but narrowly scoped features that were likely created because of this missing concept.
 Some clear examples would be `slots`, `mod_aggregate`, `file.accumulated`, requisites like `unless` and even `onchanges/watch`.. These are all features that would either be obsoleted or simplified by a register concept.
 
@@ -28,15 +30,15 @@ Some clear examples would be `slots`, `mod_aggregate`, `file.accumulated`, requi
 # Design
 [design]: #detailed-design
 
-I propose that the salt runtime keeps a global dictionary of registers that can be accessed from any .sls step during their execution to either read or write from. This dictionary could be accessed directly by modules as a global var, but more importantly -- the state definition itself could refer to the registers and interpret them as function arguments, and/or nominate them to be filled with a function return value. It support this by using jinja's NativeEnvironment interpolation, and a 'register' global state option for capturing return values.
+I propose that the salt runtime keeps a global dictionary of registers that can be accessed from any .sls step during their execution to either read from or write to. This dictionary could be accessed directly by modules as a global var, but more importantly -- the state definition itself could refer to the registers and interpret them as function arguments, and/or nominate them to be filled with a function return value. This would be done by using jinja's NativeEnvironment interpolation, and a single global state option for capturing return values, called 'register'.
 
 This proposal piggybacks on thorium's (and ansible's) concept of registers, which already proves out a fair amount of the concept to some degree, though thorium is missing the final step of interpolating the registers in commands. See [this PR](https://github.com/saltstack/salt/pull/58198) for a fix, and initial PoC to this proposal.
 
 
-Let's go straight to a common use case. Here's a simple example to run a command to find a files, and then move it to another location:
+This is easier to understand by looking at a common case. Here's a simple example to run a command to find a files, and then move it to another location:
 ```yaml
-# Capture a result into a register.
-Find a file some script might have thrown in /tmp:
+# First, run a function and capture a result into a register.
+Find a file some previous step might have thrown in /tmp:
   module.run:
     - file.find:
       - /tmp
@@ -63,10 +65,10 @@ Move file:
     - name: {| output_of_find | first |}
 ```
 
-And with this we've built a find-and-move state, without needing any features beyond runtime interpolation and capture.
+And with this we've built a find-and-move state in pure sls, without needing any features beyond runtime interpolation and capture.
 
 Many useful features are covered by jinja's expressions and so with minimal effort you can achieve some otherwise difficult-ish tasks.
-Here are a couple of improved concepts:
+Here are a couple of concepts:
 
 ```yaml
 # Requisites:
@@ -79,7 +81,7 @@ Run something maybe..:
 
 
 # Anything can basically work as an aggregate:
-Find a file some script might have thrown in /tmp:
+Read a dynamic list of packages on the minion:
   module.run:
     - file.read:
       - ./package-list
@@ -91,26 +93,29 @@ Install all the packages:
 
   ...
 
-# Orchestrations can choose targets dynamically..
+# Orchestrations can choose targets dynamically based a function call..
+# Data from thorium registers too..
 (eh I think you get the idea..)
 ```
-The only thing missing without additional features is a loop, which could be made into a register-aware version of the `loop` module.
+The only thing missing without additional features is being able to `loop` through a register, but this could work through a register-aware version of the `loop` module.
 
-It should also be possible to use something like {% set %} to make it easy to interpret function results, though this needs to be confirmed, it would make life very easy for users to handle complicated return values. It also means we probably don't need any fancy result capturing syntax.
+It should also be possible to use something like {% set %} to make it easy to interpret function results and assign them to another register, though I haven't tested this in my PoC:
 ```yaml
 Assign some register:
   test.nop:
     - eh: {|% set new_register = old_register['some']['value'] | title %|}
+
+  # Can now use new_register in subsequent steps
 ```
 
-#### Some implementation details:
+#### Some extra implementation details:
 1) I have chosen the delimiters as `{| |}` somewhat arbitrarily, and there is no need for them to encompass the entire yaml value as I have done in the above examples.. However, complications could arise if there is no demarcation of which strings need to be interpolated by jinja at runtime.
 If substring interpolation is desirable it may be feasible to mark values with an appropriately ugly delimiter, such as: `foo: __reg__ testing {| register |} 123` and have a preparser look for `__reg__` before handing the string to jinja.
-A yaml tag, or a renderer could also be used to help.
+A yaml tag, or a renderer could also be utilized here.
 
-2) The register itself is just a dictionary, kept around in memory in the same manner that thorium does it. The only deviation I would make is to not have the subkeys thorium keeps (val, count, total).
+2) The register itself is just a dictionary, kept around in memory in the same manner that thorium does it. It is not expected for the registers to survive longer than a state or orchestration run.
 
-3) I have not considered tying registers to things that alter state ordering. Though registers can functionally replace the way some requisites work, they cannot replace the core functionality of `require`. This seems fair to me but could be unexpected for some?
+3) I have not considered tying registers to things that alter state ordering. Though registers can functionally replace the way some requisites work, they cannot replace the core functionality of `require`. This seems fair to me, but could be unexpected for some?
 
 ## Alternatives
 [alternatives]: #alternatives
