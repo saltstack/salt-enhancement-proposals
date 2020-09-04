@@ -71,7 +71,7 @@ Many useful features are covered by jinja's expressions and so with minimal effo
 Here are a couple of concepts:
 
 ```yaml
-# Requisites:
+# (Non-ordered) Requisites:
 # No more _any / _all confusion
 Run something maybe..:
   gah.blah:
@@ -93,11 +93,62 @@ Install all the packages:
 
   ...
 
-# Orchestrations can choose targets dynamically based a function call..
-# Data from thorium registers too..
-(eh I think you get the idea..)
 ```
+
+One huge advantage is the ability to pass data between steps in orchestrations, essentially allowing far more complex orchestrations:
+
+```yaml
+  TODO; This is a big one and I don't want to use my actual workplace example.
+```
+
+Here is an example of how to use thorium to get your minions to highstate, instead of the original reactor:
+```yaml
+minion startup:
+  reg.set:
+    - name: new_minion_id
+    - add: id
+    - match: salt/minion/*/start
+
+is new minion ready:
+  check.ne:
+    - name: new_minion_id
+    - value: 0
+
+highstate new minion:
+  local.cmd:
+    - tgt: {| new_minion_id |}
+    - func: state.highstate
+    - require:
+      - check: is new minion ready
+
+unset register for next time:
+  reg.set_value:
+    - name: new_minion_id
+    - value: 0
+    - require:
+      - local: highstate new minion
+
+```
+And with an additional `check`.`save_event` function, you can shorten the above example. The reason this is superior to the standard reactor is that it's *dynamic*, and requires no config changes to catch and react to the event. It also allows logic to be applied to the events, and passed between states.
+You may also notice I didn't change any requisites, I just piggybacked off of states that are already in salt.
+
 The only thing missing without additional features is being able to `loop` through a register, but this could work through a register-aware version of the `loop` module.
+```yaml
+Get a list of binary patches from something like a database:
+  my_api.call
+    - name: get_patches
+    - register: bin_list
+
+Apply new config to servers:
+  loop.for_register:
+    - name: bin
+    - in: bin_list
+    - do:
+      - my_module.apply_hotfix:
+        - fix_location: {| bin |}
+```
+The above example is a need we had recently as we needed a state to read a metadata file, and apply patches to various DBs based on the metadata.
+A common counterargument would be to use jinja to make the first call (which I think is a bit of a copout), but this constrains you to needing to fetch the data at compile-time so you again cannot use the result of a previous set of steps.
 
 It should also be possible to use something like {% set %} to make it easy to interpret function results and assign them to another register, though I haven't tested this in my PoC:
 ```yaml
