@@ -68,6 +68,7 @@ The usage of `root` in ACL's could therefore be deprecated and replaced by `salt
 * Everything for `root` goes also for Windows' `SYSTEM`? 
 * The myriad of pillars/engines etc might require additional configuration/access/documentation if they access local files/sockets
 * `XDG_` equivalents on Mac, Win, BSD, etc.
+* grains; if salt-master is configured to load these, how many of those need `root` and how graceful do they fail
 
 ## `syspaths`
 
@@ -79,12 +80,19 @@ various levels of flexibility to the syspaths could be introduced to facilitate 
 [drawbacks]: #drawbacks
 
 * Everyone currently using centralized configs for their non-root invocations of salt cli's will eventually need to put in config in their profile
-** this might be slightly alleviated by altering the coalesce for e.g. salt-master socket locally
-** a salt-minion socket equivalent might be introduced?
+  * this might be slightly alleviated by altering the coalesce for e.g. salt-master socket locally
+  * a salt-minion socket equivalent might be introduced?
 * in my experience the vast majority just `sudo` as user bypassing this problem altogether
 * still using PAM; a cursory glance of PyPI shows this not to be a popular option at all
 * excessive reading of the config causes excessive cascading causes slowdowns
 * introduce 'mappings' to ACLs?
+
+# Alternatives
+
+* socket auth
+* improve SSO capabilities
+* deprecate PAM altogether
+* ship daemons built with system paths, ship user cli utils with XDG behaviours 
 
 # References
 
