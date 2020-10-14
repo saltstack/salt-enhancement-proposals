@@ -1,0 +1,43 @@
+# Configuration for welcome - https://github.com/behaviorbot/welcome
+# Configuration for new-issue-welcome - https://github.com/behaviorbot/new-issue-welcome
+# Comment to be posted to on first time issues
+newIssueWelcomeComment: >
+  Hello! Thank you for submitting a Salt Enhancement Proposal! Our process is
+  detailed in the [README.md](https://github.com/saltstack/salt-enhancement-proposals/blob/master/README.md)
+  and more about the [SEP Life-cycle](https://github.com/saltstack/salt-enhancement-proposals/blob/master/README.md#the-sep-life-cycle).
+  An Open Core Team member will be assigned to follow up and help guide this
+  SEP soon and you will find the this in the Community Slack channel #sep.
+
+  Please be sure to review our [Code of Conduct](https://github.com/saltstack/salt/blob/master/CODE_OF_CONDUCT.md).
+
+  You can also check out some of our community
+    resources:
+      - [Community Wiki](https://github.com/saltstack/community/wiki)
+      - [Salt’s Contributor Guide](https://docs.saltstack.com/en/latest/topics/development/contributing.html)
+      - [Join our Community Slack](https://saltstackcommunity.herokuapp.com/)
+      - [IRC on Freenode](https://webchat.freenode.net/#salt)
+      - [SaltStack YouTube channel](https://www.youtube.com/user/SaltStack)
+      - [SaltStackInc Twitch channel](https://www.twitch.tv/saltstackinc)
+
+# Comment to be posted to on PRs from first time contributors in your repository
+newPRWelcomeComment: >
+  Hello! Thank you for submitting a Salt Enhancement Proposal! Our process is
+  detailed in the [README.md](https://github.com/saltstack/salt-enhancement-proposals/blob/master/README.md)
+  and more about the [SEP Life-cycle](https://github.com/saltstack/salt-enhancement-proposals/blob/master/README.md#the-sep-life-cycle).
+  An Open Core Team member will be assigned to follow up and help guide this
+  SEP soon and you will find the this in the Community Slack channel #sep.
+
+  Please be sure to review our [Code of Conduct](https://github.com/saltstack/salt/blob/master/CODE_OF_CONDUCT.md).
+
+  You can also check out some of our community
+    resources:
+      - [Community Wiki](https://github.com/saltstack/community/wiki)
+      - [Salt’s Contributor Guide](https://docs.saltstack.com/en/latest/topics/development/contributing.html)
+      - [Join our Community Slack](https://saltstackcommunity.herokuapp.com/)
+      - [IRC on Freenode](https://webchat.freenode.net/#salt)
+      - [SaltStack YouTube channel](https://www.youtube.com/user/SaltStack)
+      - [SaltStackInc Twitch channel](https://www.twitch.tv/saltstackinc)
+
+# Comment to be posted to on pull requests merged by a first time user
+firstPRMergeComment: >
+  Congratulations on your first PR being merged! :tada:
