@@ -98,7 +98,31 @@ Install all the packages:
 One huge advantage is the ability to pass data between steps in orchestrations, essentially allowing far more complex orchestrations:
 
 ```yaml
-  TODO; This is a big one and I don't want to use my actual workplace example.
+get zip name:
+  salt.function:
+    - name: s3.get
+    - tgt: '{{ deploy_machine }}'
+    - kwarg:
+        bucket: 'release-blobs'
+    - register: zip_names
+
+create release workdir:
+  salt.function:
+    - name: temp.dir
+    - tgt: '{{ deploy_machine }}'
+    - kwarg:
+        prefix: 'release-'
+    - register: temp_path
+
+get zip file:
+  salt.function:
+    - name: s3.get
+    - tgt: '{{ deploy_machine }}'
+    - kwarg:
+        bucket: 'release-blobs'
+        path: '{| zip_names | sort | first |}'
+        local_file: '{| temp_path + 'migration.zip' |}
+
 ```
 
 Here is an example of how to use thorium to get your minions to highstate, instead of the original reactor:
@@ -158,6 +182,17 @@ Assign some register:
 
   # Can now use new_register in subsequent steps
 ```
+... However in many cases it might be preferable to alias the output of a module without using a `test.nop`, for which I propose a dummy 'hook' that runs after executing the state:
+```yaml
+Run and assign subset:
+  my_api.call
+    - name: get_patches
+    - register: api_output
+    - posthook:
+      - bin_list: {| api_output | list |}
+      - first_item: {| bin_list | first |}
+```
+
 
 #### Some extra implementation details:
 1) I have chosen the delimiters as `{| |}` somewhat arbitrarily, and there is no need for them to encompass the entire yaml value as I have done in the above examples.. However, complications could arise if there is no demarcation of which strings need to be interpolated by jinja at runtime.
@@ -181,11 +216,9 @@ I wouldn't mind this approach but I feel like registers model the problem and so
 ## Unresolved questions
 [unresolved]: #unresolved-questions
 
-Some helper modules will need to be created to facilitate any creative use of registers that can't be done with just jinja. Loops and State hacks are two I can think of.
+Some helper modules will need to be created to facilitate any creative use of registers that can't be done with just jinja. Loops and requisites are two I can think of.
 
-Variable capture might need some extra functionality? Being able to choose whether you replace, push, or merge results could be useful in the long run.
-
-If .sls files can now handle variables, is it possible to have them act as modules instead of states. It seems like a great idea but I haven't tried to spec out how that would be done.
+If .sls files can now handle variables, it could possible to have them act as modules instead of states. Should this be explored?
 
 # Drawbacks
 [drawbacks]: #drawbacks
