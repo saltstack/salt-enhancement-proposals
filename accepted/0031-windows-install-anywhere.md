@@ -1,8 +1,7 @@
 - Feature Name: Windows Install Anywhere
 - Start Date: 2021-01-19
 - SEP Status: Accepted
-- SEP PR: (leave this empty)
-- Salt Issue: (leave this empty)
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/41
 
 # Summary
 [summary]: #summary
