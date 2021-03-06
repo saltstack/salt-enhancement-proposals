@@ -1,6 +1,6 @@
 - Feature Name: Windows Install Anywhere
 - Start Date: 2021-01-19
-- SEP Status: Draft
+- SEP Status: Accepted
 - SEP PR: (leave this empty)
 - Salt Issue: (leave this empty)
 
