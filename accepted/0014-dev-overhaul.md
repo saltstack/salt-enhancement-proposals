@@ -118,7 +118,7 @@ One major challenge for the community is understanding changes coming in the nex
 
 Salt [documentation](https://docs.saltstack.com) will be updated to point to the most current release (2019.2.1 at the time of this writing). For users who have not yet upgraded, or those who are testing the unreleased version of Salt, Salt take an approach similar to the official Python documentation, and have a drop-down or some other way to easily select documentation for other Salt versions.
 
-We will also upgrade our communication processes to keep the Salt community more aware of the release timelines. We will share progress with the [#salt channel on IRC on Freenode](http://webchat.freenode.net/?channels=salt&uio=Mj10cnVlJjk9dHJ1ZSYxMD10cnVl83), the #release channel in the [SaltStack Community Slack](https://saltstackcommunity.herokuapp.com/), and the [Salt Users mailing list](https://groups.google.com/forum/#!forum/salt-users).
+We will also upgrade our communication processes to keep the Salt community more aware of the release timelines. We will share progress with the [#salt channel on IRC on Libera Chat](https://web.libera.chat/#salt), the #release channel in the [SaltStack Community Slack](https://saltstackcommunity.herokuapp.com/), and the [Salt Users mailing list](https://groups.google.com/forum/#!forum/salt-users).
 
 ## Versioning (Naming)
 
