@@ -10,7 +10,7 @@
 There are several reasons to rotate keys:
 - Exposure or a compromised key.
 - Security departments require key rotation on a periodic basis.
-- It is common praxis to expire or revoke keys or certificates (e.g. [eset protect 1](https://help.eset.com/protect_admin/80/en-US/certificate_replacement.html), [eset protect 2](https://support.eset.com/en/kb6824-peer-certificate-is-going-to-expire-error-in-eset-security-management-center-7x))
+- It is common praxis to expire or revoke keys or certificates (e.g. [eset protect 1](https://help.eset.com/protect_admin/80/en-US/certificate_replacement.html), [eset protect 2](https://support.eset.com/en/kb6824-peer-certificate-is-going-to-expire-error-in-eset-security-management-center-7x)).
 
 
 # Motivation
