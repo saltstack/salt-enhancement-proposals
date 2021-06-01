@@ -1,0 +1,51 @@
+# SEP 27: Create a Community Advisory Board
+- Feature Name: Create a Community Advisory Board
+- Start Date: 2020-09-22
+- SEP Status: Abandoned
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/36
+- Salt Issue: (leave this empty)
+
+## Summary
+To help give the community a voice for sharing its opinions and driving the direction of Salt, we’re establishing a Community Advisory Board. The board will represent the Salt contributor community, meet regularly with the Salt Open team, and influence changes to Salt and its community.
+
+## Motivation
+The Salt community wants to be more involved in decisions that impact the Salt open project. Currently, this process is ad hoc based on who is in attendance at Open Hours or is vocal in Slack, IRC, or the comments of issues and PRs. Community members often miss change announcements or don’t realize that decisions that impact them are being made. They want a say in Salt Enhancement Proposals (SEPs), Working Groups, technical decisions, and best practices. 
+Creating an Advisory Board will bring structure and process to influencing the Salt project. It will give community members a voice to discuss, agree, and disagree with proposed changes and decisions. Since the board will meet on a regular cadence, board members and those they represent will be able to plan, prepare for, and prioritize proposed changes.
+The Advisory Board’s main goal will be to grow and improve community collaboration and participation. Its members will work with users, contributors, and the Salt Core team. It will not be a replacement for current contributor involvement opportunities, but a supplement to those opportunities. 
+
+## Design 
+
+### Board Logistics
+- The board will be made up of 5 members from diverse technical areas and geographic locations of the Salt contributor community.
+- The board will meet via video call with the SaltStack Core team every month. 
+- Meetings will be moderated by the Community Manager.
+- Meeting agendas will be set and shared prior to meetings.
+- Board meetings will be recorded and require someone to create meeting minutes that will be shared with the greater Salt community.
+
+### Membership
+- Membership will be determined by the combined opinions of the community and the Salt Core team.
+- All active contributors are eligible to join the Advisory Board 
+- Anyone who is interested in joining the board can nominate themselves. They will need to get 3 references from other contributors. The Salt Core team will weigh this feedback when determining who to join the board.
+
+### Expectations
+- All Advisory Board members must adhere to the Contributor Code of Conduct. 
+- Members will discuss and influence the following areas: SEPs, Working Groups, technical decisions, and best practices.
+- The anticipated time commitment for board membership is 3-5 hours per month.
+
+## Alternatives
+- Maintain the community-core team interactions as they are.
+- Create another formal venue for contributors to influence the project.
+
+## Unresolved questions
+- How frequently should the board meet?
+- Who are candidates to join the board?
+- How will the board keep its projects prioritized and organized?
+- How long is a board member’s tenure?
+- What is the timeline for sharing agendas before and minutes after the meetings?
+- What will be the main communication platform for board members?
+- How will the board decide and prioritize actitivties and projects?
+
+## Drawbacks
+- Managing an Advisory Board will be time-consuming, especially in its early stages.
+- The board may not accurately represent contributors or their wishes.
+- The board may not execute on its commitments.
