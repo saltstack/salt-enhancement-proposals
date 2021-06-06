@@ -10,7 +10,7 @@
 There are several reasons to rotate keys:
 - Exposure or a compromised key.
 - Security departments require key rotation on a periodic basis.
-- It is common praxis to expire or revoke keys or certificates (e.g. [eset protect 1](https://help.eset.com/protect_admin/80/en-US/certificate_replacement.html), [eset protect 2](https://support.eset.com/en/kb6824-peer-certificate-is-going-to-expire-error-in-eset-security-management-center-7x)).
+- It is common practice to expire or revoke keys or certificates (e.g. [eset protect](https://help.eset.com/protect_admin/80/en-US/certificate_replacement.html)).
 
 
 # Motivation
@@ -22,9 +22,9 @@ The minion will not be able to reconnect to the master after the master has chan
 This is a problem e.g. with end user desktops/laptops that aren't ALWAYS connected to the master.
 
 The goal is a key management that allows for
-- Expiring and future (post-expire) keys
+- Expiring and replacement keys
 - Key rotation
-- Distribution of the post-expire key before the current key expires.
+- Distribution of the replacement key before the current key expires.
 
 Related issues:
 - https://github.com/saltstack/salt/issues/59149
@@ -37,8 +37,8 @@ Related issues:
 - Definition of any new terminology
   - Expiring key: a key that is only valid until its expire time.
   - Expire time: the time at which a key will expire.
-  - Post-expire key: a key which is unused until the expire time and which replaces the expiring key at expire time. The post-expire key is (initially) not expiring, but can be turned into an expiring key by getting an expire-time.
-  - Rotation: replacing the current, expiring key with a post-expiring key.
+  - Replacement key: a key which is unused until the expire time and which replaces the expiring key at expire time. The replacement key is (initially) not expiring, but can be turned into an expiring key by getting an expire-time.
+  - Rotation: replacing the current, expiring key with a replacement key.
 - Examples of how the feature is used
   - Chose expire time t1.
   - Create non-expiring key k2.
@@ -49,11 +49,11 @@ Related issues:
 - Corner-cases
   - Unknown.
 - A basic code example for new  API
-  - `salt * key_util.expire expire_time=2022-02-22 post_expire_key=AABBCC`
-    - You generate the post_expire_key from the public key file by:
+  - `salt * key_util.set_replacement_key expire_time=2022-02-22 replacement_key=AABBCC`
+    - You generate the replacement_key from the public key file by:
       1) Remove the first and the last line (`-----BEGIN PUBLIC KEY-----` and `-----END PUBLIC KEY-----`).
       2) Remove line breaks.
-    - The return informs if a potential current expire-time or post-expire key changed.
+    - The return informs if a potential current expire-time or replacement key changed.
 - Outline of a test plan for this feature.
   - Tests must include all use cases.
 - How do you plan to test it?
@@ -69,7 +69,9 @@ Related issues:
 [alternatives]: #alternatives
 
 What other designs have been considered?
-- The expiring time could be omitted/overridden and the master could change its key to k2 at any time/earlier. A minon that fails to authenticate the master rotates from k1 to k2.
+- A design without the "time-based stuff" (there is no expiring time):
+  - The master change its key (to the replacement key).
+  - Shortly after, each minon that fails to authenticate replaces the current key with the replacment key.
 
 What is the impact of not doing this?
 - Key rotation remains impossible for disconnected minions.
@@ -88,7 +90,7 @@ What parts of the design are still TBD?
 Why should we *not* do this? Please consider:
 
 - Implementation cost, both in term of code size and complexity
-  - Each minion must additionally store the post-expire key and the expire time, which is below 1 KB.
+  - Each minion must additionally store the replacement key and the expire time, which is below 1 KB.
   - The key rotation action is essentially moving a file.
   - The key rotation decision must be taken before re-authentication and is essentially comparing present time with expire-time.
 - Integration of this feature with other existing and planned features
