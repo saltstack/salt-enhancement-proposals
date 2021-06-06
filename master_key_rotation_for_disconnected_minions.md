@@ -16,10 +16,7 @@ There are several reasons to rotate keys:
 # Motivation
 [motivation]: #motivation
 
-If a minion is offline when the master changes its key,
-there is no way to get it after the fact.
-The minion will not be able to reconnect to the master after the master has changed its key.
-This is a problem e.g. with end user desktops/laptops that aren't ALWAYS connected to the master.
+If a minion is offline when the master changes its key, there is no way to get it after the fact. The minion will not be able to reconnect to the master after the master has changed its key. This is a problem e.g. with end user desktops/laptops that aren't ALWAYS connected to the master.
 
 The goal is a key management that allows for
 - Expiring and replacement keys
@@ -74,15 +71,15 @@ What other designs have been considered?
   - Shortly after, each minon that fails to authenticate replaces the current key with the replacment key.
 
 What is the impact of not doing this?
-- Key rotation remains impossible for disconnected minions.
-- Key rotation API remains missing.
+- Key rotation remains impossible for disconnected minions
+- Key rotation API remains missing
 
 
 ## Unresolved questions
 [unresolved]: #unresolved-questions
 
 What parts of the design are still TBD?
-- Unknown.
+- Unknown
 
 # Drawbacks
 [drawbacks]: #drawbacks
@@ -103,4 +100,4 @@ Why should we *not* do this? Please consider:
 
 
 There are tradeoffs to choosing any path
-- No, they can be combined.
+- No, they can be combined
