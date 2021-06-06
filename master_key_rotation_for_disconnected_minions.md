@@ -67,7 +67,7 @@ Related issues:
 
 What other designs have been considered?
 - A design without the "time-based stuff" (there is no expiring time):
-  - The master change its key (to the replacement key).
+  - The master changes its key (to the replacement key).
   - Shortly after, each minon that fails to authenticate replaces the current key with the replacment key.
 
 What is the impact of not doing this?
