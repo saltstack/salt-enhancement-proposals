@@ -91,7 +91,7 @@ Why should we *not* do this? Please consider:
   - The key rotation action is essentially moving a file.
   - The key rotation decision must be taken before re-authentication and is essentially comparing present time with expire-time.
 - Integration of this feature with other existing and planned features
-  - The advise [ROTATE A MASTER KEY](https://docs.saltproject.io/en/latest/topics/hardening.html#rotate-a-master-key) contains a security hole because the minion must blindly trust the new key.
+  - The advice [ROTATE A MASTER KEY](https://docs.saltproject.io/en/latest/topics/hardening.html#rotate-a-master-key) contains a security hole because the minion must blindly trust the new key.
   - There is no API to expire or rotate keys, only a [rekey script](https://github.com/dwoz/salt-rekey/) that requires all minions to be connected.
 - Cost of migrating existing Salt setups (is it a breaking change?)
   - No migration costs, not a breaking change.
