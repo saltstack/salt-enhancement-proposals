@@ -59,7 +59,7 @@ What other designs have been considered?
   - Expiring key: a key that is only valid until its expire time. This seems to add no benefit.
 
 What is the impact of not doing this?
-- Key rotation remains impossible for disconnected minions
+- Key rotation remains impossible when minions disconnect
 - Key rotation API remains missing
 
 
