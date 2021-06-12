@@ -9,8 +9,7 @@
 
 There are several reasons to rotate keys:
 - Exposure or a compromised key.
-- Security departments require key rotation on a periodic basis.
-- It is common practice to expire or revoke keys or certificates (e. g. [eset protect](https://help.eset.com/protect_admin/80/en-US/certificate_replacement.html)).
+- Security departments require to rotate keys to limit future exposure. (e. g. [eset protect](https://help.eset.com/protect_admin/80/en-US/certificate_replacement.html)).
 
 
 # Motivation
