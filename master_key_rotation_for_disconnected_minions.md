@@ -45,10 +45,10 @@ Related issues:
     - The return of `key_util.set_replacement_key` should inform if a former replacement key was replaced and if they differed.
 - How do you plan to test it?
   - Distribute k2 to minions m1 and m2.
-  - Disconnect m1.
+  - Disconnect m2.
   - Rotate key on master.
   - Verify m1 rotates key.
-  - Reconnect minion m2.
+  - Reconnect m2.
   - Verify m2 rotates key.
 
 
