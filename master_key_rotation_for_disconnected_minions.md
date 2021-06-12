@@ -9,7 +9,7 @@
 
 There are several reasons to rotate keys:
 - Exposure or a compromised key.
-- Security departments require to rotate keys to limit future exposure. (e. g. [eset protect](https://help.eset.com/protect_admin/80/en-US/certificate_replacement.html)).
+- Security departments require to limit future exposure. (e. g. [eset protect](https://help.eset.com/protect_admin/80/en-US/certificate_replacement.html)).
 
 
 # Motivation
@@ -38,14 +38,10 @@ Related issues:
 - Examples of how the feature is used
   - Create replacement key k2.
   - Distribute k2 to all minions, which could require to wait for offline minions,
-  - After complete distribution of k2, the master rotate keys from k1 to k2.
+  - After complete distribution of k2, the master can rotate keys from k1 to k2.
   - When a minion reconnects with k1 and fails, he reconnects with k2.
-- The added commands
-  - `salt * key_util.set_replacement_key replacement_key=AABBCC`
-  - `salt * key_util.get_replacement_key`
-    - You generate the value for `replacement_key` from the public key file by:
-      1) Remove the first and the last line (`-----BEGIN PUBLIC KEY-----` and `-----END PUBLIC KEY-----`).
-      2) Remove line breaks.
+- Additionial command
+  - `salt * key_util.set_replacement_key public_key=/full/path/to/file`
     - The return of `key_util.set_replacement_key` should inform if a former replacement key was replaced and if they differed.
 - How do you plan to test it?
   - Distribute k2 to minions m1 and m2.
@@ -66,11 +62,6 @@ What is the impact of not doing this?
 - Key rotation remains impossible for disconnected minions
 - Key rotation API remains missing
 
-
-## Unresolved questions
-[unresolved]: #unresolved-questions
-
-Would a grain `replacement_key` be a suitable replacement key?
 
 # Drawbacks
 [drawbacks]: #drawbacks
