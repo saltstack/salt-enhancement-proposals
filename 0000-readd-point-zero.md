@@ -1,13 +1,13 @@
 - Feature Name: Add point zero to major releases for Salt
 - Start Date: 2021-06-01
 - SEP Status: Draft
-- SEP PR: (leave this empty)
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/49
 - Salt Issue: (leave this empty)
 
 # Summary
 [summary]: #summary
 
-Originally, Salt version numbers were date based as in YYYY.MM.DD and from SEP 14 we moved away from dates and general numbers, and removed the point zero from major release version numbers. This is to add that back to the major versions because it is problematic and inconsistent.
+Originally, Salt version numbers were date based as in YYYY.MM.DD and from SEP 14 we moved away from dates and general numbers, and removed the point zero from major release version numbers. This is to add the standard format back to the major versions because it is problematic and inconsistent.
 
 
 # Motivation
@@ -33,17 +33,19 @@ What is the impact of not doing this? The impact of not making this change is th
 [unresolved]: #unresolved-questions
 
 What parts of the design are still TBD?
-Do we need to do this with supported major versions of Salt? If so, how and when?
+Do we need to do this with supported major versions of Salt? If so, how and when? Updated: 2021-JUN-22 Answer: No, it is not the intent of this SEP to revisit the past releases, but to set for the standard operating procedure and the process going forward. If warranted to re-release a major version of Salt originally released as `####` without the point zero, likely it would need separate analysis and discussion. Today, and for this SEP it is to adjust the processs for future major releases, only.
 
 # Drawbacks
 [drawbacks]: #drawbacks
 
 Why should we *not* do this? Please consider:
 
-- Implementation cost, both in term of code size and complexity. This change will revert complexities in the current code base and return it to a previous state, and will cost time and effort to revert the changes, plus change any previous versions, if decided.
+- Implementation cost, both in term of code size and complexity, exist. This change will revert complexities in the current code base and return it to a previous state, and will cost time and effort to revert the changes.
 - Integration of this feature with other existing and planned features - this shouldn't be an problem, but is likely a risk.
-- Cost of migrating existing Salt setups (is it a breaking change?). No this should be a correction to breaking packaging with SEP 14 changes in the first release of Salt with version `3000`.
-- Documentation (would Salt documentation need to be re-organized or altered?) Yes, any reference to major release as `3000` instead of `300x.0` such as `3001` `3002` and `3003` this likely will need to be corrected in the .rst files but can be left as-is on any non-code or linked documenation such a blog posts, social media, and the like. 
+- Cost of migrating existing Salt setups (is it a breaking change?). No this should be a correction to breaking packaging with SEP 14 changes in the first release of Salt with version `3000` but isn't an attempt to re-release.
+- Documentation (would Salt documentation need to be re-organized or altered?) Yes, any reference to major release as `3000` instead of `300x.0` such as `3001` `3002` and `3003` this likely will need to be corrected in the .rst files but can be left as-is on any non-code or linked documenation such a blog posts, social media, and the like.
+- Inconsisencies will exist and this SEP is one attempt at mitigation, likely there are other ways to improve and we can cite this SEP in all documentation and likely write a blog post or other content, as well.
+- Unknown risks are common and likely and can be added once identified.
 
 
 There are tradeoffs to choosing any path. Attempt to identify them here.
