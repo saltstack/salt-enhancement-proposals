@@ -195,11 +195,14 @@ would indicate that Salt was installed using the old method where everything is
 in `C:\salt`. If the binary exists, do the following:
 
 - The `root_dir` is `C:\salt`
-- The `install_dir` is `C:\salt`
+- The `install_dir` is `%ProgramFiles%\Salt Project\Salt`
 - The install location `install_dir` is displayed in the GUI
-- The install location is greyed out in the GUI
+- A checkbox allows the user to move the `root_dir` to `%ProgramData%`
+  - This moves `conf`, `var`, and `srv` to `%ProgramData%\Salt Project\Salt`
+  - ONLY IF `%ProgramData%\Salt Project\Salt` does not exist or is empty.
+    Otherwise, Abort
 - The `root_dir` and `install_dir` are saved in the registry
-- Upgrade Salt in place
+- Upgrade Salt (use new install location)
 - **** DONE ****
 
 ### 3. New Installation
