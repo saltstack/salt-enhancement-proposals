@@ -1,6 +1,6 @@
 - Feature Name: Add point zero to major releases for Salt
 - Start Date: 2021-06-01
-- SEP Status: Accepted
+- SEP Status: Final Comment Period
 - SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/49
 - Salt Issue: (leave this empty)
 
