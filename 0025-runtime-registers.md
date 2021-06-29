@@ -1,7 +1,7 @@
 - Feature Name: (runtime-registers)
 - Start Date: (2020-08-25)
 - SEP Status: Draft
-- SEP PR: (leave this empty)
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/33
 - Salt Issue: (leave this empty)
 
 # Summary
