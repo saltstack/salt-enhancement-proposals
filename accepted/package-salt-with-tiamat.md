@@ -1,7 +1,7 @@
 - Feature Name: Use Tiamat built packages for distribution of salt
 - Start Date: 2020-06-12
-- SEP Status: Draft
-- SEP PR: (leave this empty)
+- SEP Status: Accepted
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/34
 - Salt Issue: (leave this empty)
 
 # Summary
