@@ -78,6 +78,9 @@ With this said, we feel that forcing the ongoing usage of the term "Master" in p
 materials will potentially be an issue. Therefore we propose adding a new startup script allowing the Salt Master
 to be started up via an alternative name. This alternative name will also be available for use in presentations.
 
+## Master Git Branch
+
+The "master" branch used in git will be changed to "main".
 
 ## Alternatives
 [alternatives]: #alternatives
