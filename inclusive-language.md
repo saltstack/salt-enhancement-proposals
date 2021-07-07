@@ -50,7 +50,7 @@ Please note that these topics have been discussed at length and are actively bei
 
 While we share a strong desire to adhere to inclusive language, we should not break user
 installs. We feel that if this initiative were to create added and onerous work, confusion, and/or
-frustration for our users then it could backfire in the overall intent to create a move understanding
+frustration for our users then it could backfire in the overall intent to create a more understanding
 and peaceful world. This means that standard deprecation paths will be adhered to for changes and
 the impact of a change will need to be carefully considered.
 
@@ -74,10 +74,9 @@ to the project and, I feel, to the intent of the movement.
 We also feel that the term Master/Minion is non-derogatory due to the fact that the word Master is not paired
 with a derogatory term for a subservient entity. This was the original intent for the choice made in our verbiage.
 
-With this said, we feel that forcing the ongoing usage of the term "Master" in new documentation and presentation
+With this said, we feel that forcing the ongoing usage of the term "Master" in presentation
 materials will potentially be an issue. Therefore we propose adding a new startup script allowing the Salt Master
-to be started up via an alternative name. This alternative name will also be used in introductory documentation
-and presentations as soon as possible.
+to be started up via an alternative name. This alternative name will also be available for use in presentations.
 
 
 ## Alternatives
