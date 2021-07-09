@@ -82,6 +82,12 @@ to be started up via an alternative name. This alternative name will also be ava
 
 The "master" branch used in git will be changed to "main".
 
+## Interacting With Existing Systems
+
+Many systems currently exist which do not use inclusive language. In instances where the interaction or
+management of underlying systems does not use inclusive language, Salt will use the language of the underlying,
+managed system.
+
 ## Alternatives
 [alternatives]: #alternatives
 
