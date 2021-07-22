@@ -1,7 +1,7 @@
-- Feature Name: (inclusive-language)
-- Start Date: (2021-07-06)
+- Feature Name: SEP34: Inclusive Language
+- Start Date: 2021-07-06
 - SEP Status: Draft
-- SEP PR: (leave this empty)
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/54
 - Salt Issue: (leave this empty)
 
 # Summary
