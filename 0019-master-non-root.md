@@ -1,98 +1,128 @@
-- Feature Name: [security] Improve the default behaviour of salt when running under different scenario's than as `root`
-- Start Date: 2020-02-28
+- Feature Name: [security] Run salt master services as non root user by default
+- Start Date: 2021-08-03
 - SEP Status: Draft
-- SEP PR: 25
+- SEP PR: (leave this empty)
 - Salt Issue: (leave this empty)
 
 # Summary
 [summary]: #summary
 
-Salt has always assumed running as root for all of it's deployment scenarios. 
-As a consequence, it has always required multiple manual configuration and directory configurations to get salt in it's many incarnations to work under non-root privileges.
+Salt has historically assumed that all salt components run as root. 
+Although support has been added for running the master and minion as non root users, this is not simple to set up and the documentation discourages it.
+This has had a further impact that the salt cli tools have to be run as root also.
 
 It has long been a standing best-practice to run serving daemons under regular user privileges, opening up additional capabilities as necessary.
-The core salt master has very little need for these additional capabilities, and these requirements can be orchestrated otherwise.
+The `salt-master` and `salt-api` processes do not require root privileges for normal operation.
 
-Improving the default behaviour would additionally make salt more convenient to deploy and use in stand-alone/multi-minion scenario's (e.g. salt-ssh from a multi-user bastion) and containers. 
+The `salt-master` and `salt-api` both handle connections from potentially untrusted clients. By reducing the privilge of these processes we
+can reduce the impact of remotely exploitable vulnerabilities in those services.
+
+The `salt-minion` process generally requires root privileges in order to effectively manage the systems it runs on. It may be possible to modify the
+`salt-minion` process to run with lower privilege and gain additional privileges as required, but that is out of scope for this SEP due to the
+additional complexity that would require and because the `salt-minion` process is not require to accept incoming connections from potentially
+untrusted clients.
+
+An earlier version of this SEP also covered changes to config file locations, but that has been removed for simplicity and can be dealt with as
+a seperate SEP if required.
 
 
 # Motivation
 [motivation]: #motivation
 
 * Initially filed as SEP as suggested by Ch3LL in [#55886](https://github.com/saltstack/salt/issues/55886)
-* Make salt more flexible/easy to use in non-root scenario's
-* Make salt-master safer to deploy by running it under locked down privileges by default
-* Make salt align and integrate better with the wider ecosystem
+* Reduce the impact of future vulnerabilities by having salt master components run as unprivileged users
+* Remove requirement for users of salt to have root privileges to run salt cli tools
+* Salt master services should be configured to use minimum privilege by default and not require additional configuration by users to do so
+* Salt cli tools should be usable by non root users, with good default groups and ACLs
 
-# Design concepts
-[design]: #design-concepts
+# Design
+[design]: #detailed-design
 
-## Salt behaviours
+## Salt master services
 
-`salt-{master,minion,ssh,cloud}` start conforming to the XDG application directory standards
-* run as `root` or `salt`: current syspath defaults
-* run as user: `${XDG_{CACHE,CONFIG,DATA}_HOME}/salt/{master,minion,ssh,cloud}` etc.
-* all necessary dirs are created if nonexistent
-* the salt config `user` and SSH equivalent both default to the running user
-* all configs written are written by default to a separate config dir, e.g. `_generated.d`
+* `salt-master` and `salt-api`
+* run as dedicated user, eg `salt-master`
+* run `salt-api` as seperate dedicated user if possible
+* dedicated users are members of `salt` group
+* read only access to configs in `/etc/salt` through membership of `salt` group
+  * `/etc/salt/master`
+  * `/etc/salt/master.d/`
+  * `/etc/pki/master/`
+* read/write access to specific directories under `/etc/salt` through `salt-master` user:
+  * `/etc/salt/master.d/_generated.d`
+  * `/etc/salt/pki/master/*/`
+* read/write access via `salt` group to:
+  * `/var/cache/salt/master`
+  * `/var/run/salt/master`
+  * `/var/log/salt`
+
+
+## Salt cli tools
+
+* `salt`, `salt-ssh`, `salt-cp`, `salt-key`, `salt-run` and `salt-ssh`
+* Users requiring use of cli tools can be added to `salt` group and additional publisher_acl group
+* read only access to configs in `/etc/salt` through membership of `salt` group
+  * `/etc/salt/master`
+  * `/etc/salt/master.d/`
+  * `/etc/pki/master/`
+* read/write access via `salt` group to:
+  * `/var/cache/salt/master`
+  * `/var/run/salt/master`
+  * `/var/log/salt`
+* Additional groups defined `salt-users` and `salt-admins` with suitable publisher_acl configs (eg `salt-admins` allowed to run any module/function, `salt-users` just functions on minions)
+
 
 ## OS package changes
 
-* install system user/group `salt` 
-* change init-scripts to invoke as `salt` and override XDG default back to `/etc/salt/<daemon>/daemon.conf`
-* install all `/etc/salt` dirs owned by `root:salt` `750`
-* install `/var/cache/salt` and `/srv/salt` etc. owned by `salt:salt` `770`
-* allow writing on `/etc/salt/pki` dirs and `/etc/salt/<daemon>/_generated.d` dirs
-* allow `salt` access to `/etc/shadow`
+* add system user/group `salt`
+* add `salt-master` user
+* add `salt-master` (or `salt-api` user if using) to `shadow` group
+* change init-scripts to invoke services as `salt-master`
+* create `/etc/salt` with ownership `root:salt` and permissions `0750`
+* create `/etc/salt/master` with ownership `root:salt` and permissions `0640`
+* create `/etc/salt/master.d/` with ownership `root:salt` and permissions `0750`
+* create `/etc/salt/pki/master/` with ownership `root:salt` and permissions `0750`
+* create `/etc/salt/pki/master/*` with ownership `salt-master:salt` and permissions `0750`
+* create `/etc/salt/master.d/_generated.d/` with ownership `salt-master:salt` and permissions `0750`
+* create `/var/cache/salt/master/` with ownership `root:salt` and permissions `0770`
+* create `/var/run/salt/master/` with ownership `root:salt` and permissions `0770`
+* create `/var/log/salt/` with ownership `root:salt` and permissions `0770`
+* add `salt-users` and `salt-admins` groups
+* create initial master config with publisher_acl defined
+
 
 ## PAM
 
-[The documentation](https://docs.saltstack.com/en/latest/ref/auth/all/salt.auth.pam.html#module-salt.auth.pam) states it does not support authenticating as root.
-Besides, at least one serious issue ([#7762](https://github.com/saltstack/salt/issues/7762)) stated for this to be broken because at any rate the salt running user needs access to `/etc/shadow`.
-
-Because the `salt-master` executing the commands would now be running as `salt`, that can be considered the highest achievable named authority within the Salt master.
-The usage of `root` in ACL's could therefore be deprecated and replaced by `salt`.
+[The documentation](https://docs.saltproject.io/en/master/topics/eauth/index.html) says that "eAuth using the PAM external auth system requires salt-master to be run as root as this system needs root access to check authenticationn and this is also documented in [#7762](https://github.com/saltstack/salt/issues/7762). Many Linux distributions have `/etc/shadow` and `/etc/gshadow` readable by the `shadow` group. By adding the `salt-master` user to this group we should be able to work round this, but this requires some testing.
 
 
 ## Migration paths
 
-* if `user` is set manually, show deprecation/path default change warning
-* stop `user` config usage and support eventually, making `user` a runtime variable
-* `runas` / elevation scenario's
-* all user ACL's to `root` get deprecation warnings to change to `salt`
+* On upgrade, if existing config doesn't define non root user/group in config, install as previously
+* Add helper scripts to update config and directories of existing installs
+* Add warnings when salt cli tools run as root on systems configured with non-root user/group
 
 # Unresolved questions
 [unresolved]: #unresolved-questions
 
-* `salt` as top-ACL user is still a hard-code
-* Everything for `root` goes also for Windows' `SYSTEM`? 
-* The myriad of pillars/engines etc might require additional configuration/access/documentation if they access local files/sockets
-* `XDG_` equivalents on Mac, Win, BSD, etc.
+* Ensuring files/directories written by `salt-master` user or other users maintain correct group ownership and permissions. May be solvable with setgid directories or changes to salt cli tools.
+* Minimum set of files/directories that need to be readable or writable by `salt-master` user and users in `salt` group.
+* Everything for `root` goes also for Windows' `SYSTEM`?
 * grains; if salt-master is configured to load these, how many of those need `root` and how graceful do they fail
-
-## `syspaths`
-
-various levels of flexibility to the syspaths could be introduced to facilitate this, e.g.
-* additional coalescing default items in `syspaths.py` and/or `config`
-* generating & loading a `_syspaths.py` to cache
+* Does publish_acl support `@wheel` and `@runner` syntax
+* Which supported distributions support the `shadow` group
 
 # Drawbacks
 [drawbacks]: #drawbacks
 
-* Everyone currently using centralized configs for their non-root invocations of salt cli's will eventually need to put in config in their profile
-  * this might be slightly alleviated by altering the coalesce for e.g. salt-master socket locally
-  * a salt-minion socket equivalent might be introduced?
-* in my experience the vast majority just `sudo` as user bypassing this problem altogether
-* still using PAM; a cursory glance of PyPI shows this not to be a popular option at all
-* excessive reading of the config causes excessive cascading causes slowdowns
-* introduce 'mappings' to ACLs?
+* Large change in initial behaviour of installed salt master will require updates to documentation and education of users
+* Migration for existing setups may be complicated
+
 
 # Alternatives
 
-* socket auth
-* improve SSO capabilities
-* deprecate PAM altogether
-* ship daemons built with system paths, ship user cli utils with XDG behaviours 
+* Lock down `salt-master` and `salt-api` processes using AppArmour, SELinux or similar tools
+* PAM as non-root - socket auth
 
 # References
 
