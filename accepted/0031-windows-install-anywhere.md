@@ -7,11 +7,11 @@
 # Summary
 [summary]: #summary
 
-Allow the user to select the install location (`install_dir`) for Salt in the
+Allow the user to select the install location (``install_dir``) for Salt in the
 Windows Installer. The default install location will be
-`%ProgramFiles%\Salt Project\Salt` for the binary data and
-`%ProgramData%\Salt Project\Salt` for the Root Directory (`root_dir`). Add a
-command line switch to allow the user to set the `install_dir` via the command
+``%ProgramFiles%\Salt Project\Salt`` for the binary data and
+``%ProgramData%\Salt Project\Salt`` for the Root Directory (``root_dir``). Add a
+command line switch to allow the user to set the ``install_dir`` via the command
 line.
 
 # Motivation
@@ -44,20 +44,20 @@ In order to follow the Windows paradigm for software installation we will
 separate out binary and volatile/config data. It is proposed that this be broken
 out as follows:
 
-**Binary Data**:
+__Binary Data__:
 
 ```
 c:\salt\*.files -> C:\Program Files\Salt Project\Salt\*.files
 c:\salt\bin     -> C:\Program Files\Salt Project\Salt\bin
 ```
 
-**Config/PKI Data**:
+__Config/PKI Data__:
 
 ```
 c:\salt\conf -> C:\ProgramData\Salt Project\Salt\conf
 ```
 
-**Volatile Data**:
+__Volatile Data__:
 
 ```
 c:\salt\srv -> C:\ProgramData\Salt Project\Salt\srv
@@ -68,26 +68,27 @@ c:\salt\var -> C:\ProgramData\Salt Project\Salt\var
 
 [registry]: #registry
 
-In a Salt installation there is a root directory (`root_dir`) and an
-installation directory (`install_dir`). The `root_dir` is where all Salt
+In a Salt installation there is a root directory (``root_dir``) and an
+installation directory (``install_dir``). The ``root_dir`` is where all Salt
 non-binary data is stored. Other directories such as the config directory
-(`conf_dir`) are based on the `root_dir`. The `install_dir` indicates the
+(``conf_dir``) are based on the ``root_dir``. The ``install_dir`` indicates the
 location of the Salt binaries.
 
-In the previous method of installation the default locations were `C:\salt` for
-the `root_dir` and `C:\salt\bin` for the `install_dir`. The new installation
-method will split these out and default to standard Windows locations in
-`%ProgramData%` for `root_dir` and `%ProgramFiles%` for `install_dir`. It will
-also allow the user to change the `install_dir` in the GUI or via a command line
-switch. The settings will be stored in the registry at the following locations:
+In the previous method of installation the default locations were ``C:\salt``
+for the ``root_dir`` and ``C:\salt\bin`` for the ``install_dir``. The new
+installation method will split these out and default to standard Windows
+locations in ``%ProgramData%`` for ``root_dir`` and ``%ProgramFiles%`` for
+``install_dir``. It will also allow the user to change the ``install_dir`` in
+the GUI or via a command line switch. The settings will be stored in the
+registry at the following locations:
 
-**install_dir**
+__install_dir__
 
 - Path:     ``HKLM\\SOFTWARE\\Salt Project\\Salt``
 - Key Name: ``install_dir``
 - Default:  ``C:\\Program Files\\Salt Project\\Salt``
 
-**root_dir**
+__root_dir__
 
 - Path:     ``HKLM\\SOFTWARE\\Salt Project\\Salt``
 - Key Name: ``root_dir``
@@ -95,8 +96,9 @@ switch. The settings will be stored in the registry at the following locations:
 
 These registry settings will be created by the installer after the user selects
 the location for the Salt installation. If it is an existing old method
-installation the registry entries will be created using the old locations as
-their values.
+installation, the registry entries will be created using the old locations as
+their values unless the user chooses to move them in the GUI or via command-
+line switch.
 
 ## Program Files / ProgramData
 
@@ -131,14 +133,21 @@ then it will be incumbent upon the user to set permissions to that directory.
 
 [installer-flags]: #installer-flags
 
-*install_location*
+__install-location__
 
-A new `install_location` installer flag will be added. This option will allow
+A new ``/install-location`` installer flag will be added. This option will allow
 the user to silently set the install location for Salt. The default will be
 ``%ProgramFiles%\Salt Project\Salt``. This would apply to new installations only
 and will be ignored for all other scenarios.
 
-# Installation Scenarios 
+__move-config__
+
+A ``/move-config`` installer flag will be added. This option will move an
+existing config found at ``C:\salt`` to the new ``%ProgramData%`` directory. The
+``root_dir`` registry entry will use the new location. This will only apply when
+there is an existing config found at ``C:\salt``. Otherwise it is ignored.
+
+# Installation Scenarios
 
 [installation-scenarios]: #installation-scenarios
 
@@ -148,72 +157,77 @@ There are 3 scenarios the installer will need to handle while installing Salt:
 2. Existing Old Method Installation
 3. New Installation
 
-In either case of an existing installation, old or new, we want to just upgrade
-in place. This means the `install_dir` and `root_dir` would remain unchanged. If
-it's an existing new method installation, the installer would use the locations
-defined in the registry. For old method installations the `install_dir` and
-`root_dir` would both be `C:\salt`. In both cases the GUI would display the
-current install location, but it would be greyed out. The new installation is
-the only scenario that allows the user to select an install location. The GUI
-will display a dialog box with a directory picker that will allow the user to
-browse to a directory. The default will be the directory defined in the
-`%ProgramFiles%` environment variable.
+In either case of an existing installation, old or new, we want to be able to
+upgrade in place. This means the ``install_dir`` and ``root_dir`` would remain
+unchanged. If it's an existing new method installation, the installer would use
+the locations defined in the registry. For old method installations the
+``install_dir`` and ``root_dir`` would both be ``C:\salt``. In both cases the
+GUI would display the current install location, but it would be greyed out.
+There should be an option to move an existing config at ``C:\Salt`` to the new
+location at ``%ProgramData%``. This would be accomplished via a checkbox in the
+GUI or a command line switch (``move-config``).
 
-The `root_dir` is not user configurable. It will be `C:\salt` for old method
-installations and `%ProgramData%` for new method installations.
+The New Installation and Existing Old Method Installations both allow the user
+to select an install location. The GUI will display a dialog box with a
+directory picker that will allow the user to browse to a directory. The default
+will be the directory defined in the ``%ProgramFiles%`` environment variable.
+
+The ``root_dir`` is not user configurable, other than the option to move an
+existing ``root_dir`` in ``C:\salt`` to ``%ProgramData%``.
 
 In the future we may add the ability to install Salt on a per-user basis. In
-that case the registry data would be found in HKCU, and the `root_dir` would
-default to `%LOCALAPPDATA%`.
+that case the registry data would be found in HKCU, and the ``root_dir`` would
+default to ``%LOCALAPPDATA%``.
 
-We don't want the installer to change the locations of `install_dir` and
-`root_dir` for an existing installation. We don't want the installer to move any
-existing config or binary files. If the user wishes to change the locations of
-those files they would have to do that manually by uninstalling and reinstalling
-Salt.
+We don't want the installer to change the locations of ``install_dir`` and
+``root_dir`` for an existing installation without the user's knowledge.
+Therefore, this must be explicitely specified in the GUI by checking a check
+box or on the command-line by passing a swtich.
 
 Below is the logic to handle each scenario:
 
 ### 1. Check for Existing New Method Installation
 
 Check for an existing new method installation by checking the registry for the
-presence of `HKLM\SOFTWARE\Salt Project\Salt`. This indicates that Salt was
+presence of ``HKLM\SOFTWARE\Salt Project\Salt``. This indicates that Salt was
 installed using the new method. If the registry key exists, do the following:
 
-- The `root_dir` is as defined in the registry
-- The `install_dir` is as defined in the registry
-- The install location `install_dir` is displayed in the GUI
+- The ``root_dir`` is as defined in the registry
+- The ``install_dir`` is as defined in the registry
+- The install location ``install_dir`` is displayed in the GUI
 - The install location is greyed out in the GUI
-- Upgrade Salt in place 
-- **** DONE ****
+- Upgrade Salt in place
+- DONE
 
 ### 2. Check for Existing Old Method Installation
 
 If a new method installation is not detected, check for an existing old method
-installation by looking for the existence of `python.exe` in `C:\salt\bin`. This
-would indicate that Salt was installed using the old method where everything is
-in `C:\salt`. If the binary exists, do the following:
+installation by looking for the existence of `python.exe` in ``C:\salt\bin``.
+This would indicate that Salt was installed using the old method where
+everything is in ``C:\salt``. If the binary exists, do the following:
 
-- The `root_dir` is `C:\salt`
-- The `install_dir` is `%ProgramFiles%\Salt Project\Salt`
-- The install location `install_dir` is displayed in the GUI
-- A checkbox allows the user to move the `root_dir` to `%ProgramData%`
-  - This moves `conf`, `var`, and `srv` to `%ProgramData%\Salt Project\Salt`
-  - ONLY IF `%ProgramData%\Salt Project\Salt` does not exist or is empty.
+- The ``root_dir`` is ``C:\salt``
+- The ``install_dir`` is ``%ProgramFiles%\Salt Project\Salt``
+- The install location ``install_dir`` is displayed in the GUI
+- The user can change the install location
+- A checkbox allows the user to move the ``root_dir`` to ``%ProgramData%``
+  - This moves ``conf``, ``var``, and ``srv`` to
+    ``%ProgramData%\Salt Project\Salt``
+  - ONLY IF ``%ProgramData%\Salt Project\Salt`` does not exist or is empty.
     Otherwise, Abort
-- The `root_dir` and `install_dir` are saved in the registry
+- The ``root_dir`` and ``install_dir`` are saved in the registry
 - Upgrade Salt (use new install location)
-- **** DONE ****
+- DONE
 
 ### 3. New Installation
 
 If neither installation type has been detected, then this must be a new
 installation. The installer will do the following:
 
-- The `root_dir` is `%ProgramData%\Salt Project\Salt`
-- The `install_dir` defaults to `%ProgramFiles%\Salt Project\Salt`
-- The install location `install_dir` is displayed in the GUI
+- The ``root_dir`` is ``%ProgramData%\Salt Project\Salt``
+- The ``install_dir`` defaults to ``%ProgramFiles%\Salt Project\Salt``
+- The install location ``install_dir`` is displayed in the GUI
 - The user can change the install location
-- The `root_dir` and `install_dir` are saved in the registry
+- The ``root_dir`` and ``install_dir`` are saved in the registry
 - Install Salt
-- **** DONE ****
+- DONE
