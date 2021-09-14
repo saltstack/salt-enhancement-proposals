@@ -9,6 +9,8 @@
 
 Most subsystems in Salt are pluggable.  For example, adding new External Pillar modules, Proxy Minion types, and SDB backends are all well documented and leveraged extensively.  However, while some work has been done, Salt transports are not currently pluggable.  At the moment Salt effectively has two transports: TCP, and ZeroMQ.  There is great value in exploring other transport types including things like [NATS](https://nats.io), [Kafka](https://kafka.apache.org), [RabbitMQ](https://www.rabbitmq.com).
 
+Note there is a closed and unmerged PR that did some refactoring and added an http transport: [saltstack/salt#57210](https://github.com/saltstack/salt/pull/57210)
+
 # Motivation
 [motivation]: #motivation
 
@@ -18,7 +20,7 @@ As Salt continues to expand into larger and larger environments, ZeroMQ presents
 
 1. Salt's High Availability and Disaster Recovery scenarios are not as robust as they could be.  Hot-hot masters can be an effective HA/DR tool but introduce their own issues.  Failover masters don't always failover the way you anticipate.
 2. We often talk about ZeroMQ as being a "brokerless" transport but that's not entirely true in a Salt environment.  If the master goes away for some reason, the event bus also goes away.
-3. While we used to recommend syndics as a solution to complex Salt topologies in recent years we are deprecating this approach and suggest users apply the patterns offered by the Salt Enterprise product (now known as vRA SaltStack Config post VMware acquisition).  This doesn't solve some of the latency, deployment, and scaling issues that customers encounter.  One example involves customers that want to bridge several on-prem datacenters with presences in the cloud.  This turns out to generate a great deal of complexity and reliability challenges.
+3. While we used to recommend syndics as a solution to complex Salt topologies in recent years we are deprecating this approach and suggest users apply the patterns offered by the Salt Enterprise product (now known as vRA SaltStack Config post VMware acquisition).  This doesn't solve some of the latency, deployment, and scaling issues that customers encounter.  One example involves customers that want to bridge several on-prem datacenters with presences in the cloud.  This turns out to generate many complexity and reliability challenges.
 4. ZeroMQ has always been a black box and the ZeroMQ project has resisted adding observability hooks, preferring instead to spend effort on the "just works" part of the library and/or recommending that library users layer their own observability on top.  But Salt customers continue asking questions like "is Salt dropping events? Is my bus 'overloaded'?  How do I know when I should add another master and split my minions between them?  How can I predict my event bus traffic so I can know that my Salt infrastructure will perform in a crisis?"  In general all we have had to offer them is rules of thumb and estimates.
 
 In some cases we can solve these problems by adding additional features inside the Salt codebase.  But other scenarios are impossible without direct transport support.
@@ -30,26 +32,16 @@ Now it makes little sense to do the work to make transports pluggable without a 
 # Design
 [design]: #detailed-design
 
-This is the bulk of the SEP. Explain the design in enough detail for somebody familiar
-with the product to understand, and for somebody familiar with the internals to implement. It should include:
-
-- Definition of any new terminology
-- Examples of how the feature is used.
-- Corner-cases
-- A basic code example in case the proposal involves a new or changed API
-- Outline of a test plan for this feature. How do you plan to test it? Can it be automated?
-
-#### Deployment/Configuration
+## Deployment/Configuration
 Salt already has a concept of configurable transport (e.g. "zeromq" or "tcp") and it is set in master/minion config files. The proposal is to introduce a new transport of type "rabbitmq" and also include any additional metadata such as broker address, vhost, credentials, etc. 
 RMQ broker may be deployed by Salt or in some cases it may be a shared enterprise resource that Salt can be pointed to. 
 
-#### Abstractions
+## Abstractions
 Salt transport is already mostly abstracted as a client/server interface with a factory pattern. A factory pattern is used to instantiate a specific instance of client/server. 
 The proposal is to implement the interfaces for RMQ. See https://github.com/saltstack/salt/tree/master/salt/transport.
 Note that as part of this effort we have an opportunity to clean up the interfaces (e.g. decouple auth from data channel) and we shall do so opportunistically. 
 
-
-#### RabbitMQ topology
+## RabbitMQ topology
 Management and use of RabbitMQ objects (vhosts, users, exchanges, queues, topics, etc.): 
 
 * VHOST/tenant, user, permission configuration is performed by the tenant admin persona or equivalent; master/minion read pertinent configuration from config files or equivalent. A master/minion belong to a single tenant/vhost.
@@ -73,12 +65,12 @@ Management and use of RabbitMQ objects (vhosts, users, exchanges, queues, topics
   * When object is declared with auto-delete=True, it will be deleted when last consumer dies (e.g. when all connections are closed). This is gives us parity with ZeroMQ and simplifies implementation.
 
 
-#### Third-party libraries
+## Third-party libraries
 Python "pika" library (BSD license) is the industry standard for interacting with AMQP and RabbitMQ. It supports both sync and async patterns and also supports Tornado IO loops. 
 The proposal is to use the "pika" library (https://pypi.org/project/pika/) to interact with RabbitMQ from Salt and use non-blocking/async-style connections as much as possible. 
 
-### Testing 
-Existing parametertized functional tests will be updated to cover rabbit as a new transport. These tests already iterate over collection of transports ("tcp", "zeromq") and encyprtion types ("clear, "aes).
+## Testing 
+Existing parameterized functional tests will be updated to cover rabbit as a new transport. These tests already iterate over collection of transports ("tcp", "zeromq") and encryption types ("clear, "aes").
 New functional tests will be added to cover some edge cases, e.g. connection recovery in cases when RMQ broker restarts. 
 A scale test will be performed to confirm the new transport can support 50K minions and message throughput of 1 job per minute x 5 messages per job x 1 minion.
 
@@ -86,7 +78,6 @@ A scale test will be performed to confirm the new transport can support 50K mini
 [alternatives]: #alternatives
 
 As part of early PoC efforts we also created Salt engines that bridge the ZeroMQ transport to other event buses.  This can be an effective approach, and some of these bridges will persist as parts of the product so customers can run some parts of their infrastructure with ZeroMQ and others with other transports.  Like any engineering solution these have tradeoffs (performance, duplication of network traffic, potential for misconfiguration).
-
 
 ## Unresolved questions
 [unresolved]: #unresolved-questions
