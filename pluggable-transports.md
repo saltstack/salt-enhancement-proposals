@@ -39,6 +39,49 @@ with the product to understand, and for somebody familiar with the internals to 
 - A basic code example in case the proposal involves a new or changed API
 - Outline of a test plan for this feature. How do you plan to test it? Can it be automated?
 
+#### Deployment/Configuration
+Salt already has a concept of configurable transport (e.g. "zeromq" or "tcp") and it is set in master/minion config files. The proposal is to introduce a new transport of type "rabbitmq" and also include any additional metadata such as broker address, vhost, credentials, etc. 
+RMQ broker may be deployed by Salt or in some cases it may be a shared enterprise resource that Salt can be pointed to. 
+
+#### Abstractions
+Salt transport is already mostly abstracted as a client/server interface with a factory pattern. A factory pattern is used to instantiate a specific instance of client/server. 
+The proposal is to implement the interfaces for RMQ. See https://github.com/saltstack/salt/tree/master/salt/transport.
+Note that as part of this effort we have an opportunity to clean up the interfaces (e.g. decouple auth from data channel) and we shall do so opportunistically. 
+
+
+#### RabbitMQ topology
+Management and use of RabbitMQ objects (vhosts, users, exchanges, queues, topics, etc.): 
+
+* VHOST/tenant, user, permission configuration is performed by the tenant admin persona or equivalent; master/minion read pertinent configuration from config files or equivalent. A master/minion belong to a single tenant/vhost.
+* Minions running in customer's environment should be considered potential malicious actors (e.g. initiators of message flood). Consider the blast radius if/when this occurs. The impact should not transcend the org/tenant that minion belongs to.
+   * Use permissions to limit minion's access to queues and exchanges.
+   * Configure maximum queue size (several thousand messages)
+
+* Create 1 x Fanout exchange/queue used for message publishing, one per master cluster.
+* Create 1 x Fanout exchange/queue used to send requests/commands to minions, one per master cluster.
+* [Optional] Create 1 x exchange/queue for initial master/minion authentication. Once authenticated, the minion can switch to another channel for communication.
+* Set "auto-ack" to True for consuming messages. This gives us parity with ZeroMQ. There are potentially areas where bringing the ack up the stack could be useful, but we do not know yet where. 
+* Use reply queues (with auto_delete=True) and correlation ids to correlate request/response. See https://www.rabbitmq.com/tutorials/tutorial-six-dotnet.html).
+  *  Note that we need to scale to 50K minions per vhost, so need to be careful about the number of queues we create.
+
+* Associate a "dead-letter" exchange for each queue. Undelivered messages will end up there. This can be useful for troubleshooting. (See https://www.cloudamqp.com/blog/when-and-how-to-use-the-rabbitmq-dead-letter-exchange.html)
+* Use durable quorum queues for consistency
+  *   When it comes to trade-offs, we favour consistency over performance.
+  *   Some features are not yet available for quorum queues, such as message TTL, message priority (see https://www.rabbitmq.com/quorum-queues.html)
+* Configure message expiry (TTL) to be no longer than 72 hours. Expired messages will be delivered to the dead-letter exchange. Note that TTL can be configure per-message or per-queue.
+* Artifact cleanup (queues, exchanges)
+  * When object is declared with auto-delete=True, it will be deleted when last consumer dies (e.g. when all connections are closed). This is gives us parity with ZeroMQ and simplifies implementation.
+
+
+#### Third-party libraries
+Python "pika" library (BSD license) is the industry standard for interacting with AMQP and RabbitMQ. It supports both sync and async patterns and also supports Tornado IO loops. 
+The proposal is to use the "pika" library (https://pypi.org/project/pika/) to interact with RabbitMQ from Salt and use non-blocking/async-style connections as much as possible. 
+
+### Testing 
+Existing parametertized functional tests will be updated to cover rabbit as a new transport. These tests already iterate over collection of transports ("tcp", "zeromq") and encyprtion types ("clear, "aes).
+New functional tests will be added to cover some edge cases, e.g. connection recovery in cases when RMQ broker restarts. 
+A scale test will be performed to confirm the new transport can support 50K minions and message throughput of 1 job per minute x 5 messages per job x 1 minion.
+
 ## Alternatives
 [alternatives]: #alternatives
 
