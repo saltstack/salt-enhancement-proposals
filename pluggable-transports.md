@@ -21,7 +21,7 @@ As Salt continues to expand into larger and larger environments, ZeroMQ presents
 1. Salt's High Availability and Disaster Recovery scenarios are not as robust as they could be.  Hot-hot masters can be an effective HA/DR tool but introduce their own issues.  Failover masters don't always failover the way you anticipate.
 2. We often talk about ZeroMQ as being a "brokerless" transport but that's not entirely true in a Salt environment.  If the master goes away for some reason, the event bus also goes away.
 3. While we used to recommend syndics as a solution to complex Salt topologies in recent years we are deprecating this approach and suggest users apply the patterns offered by the Salt Enterprise product (now known as vRA SaltStack Config post VMware acquisition).  This doesn't solve some of the latency, deployment, and scaling issues that customers encounter.  One example involves customers that want to bridge several on-prem datacenters with presences in the cloud.  This turns out to generate many complexity and reliability challenges.
-4. ZeroMQ has always been a black box and the ZeroMQ project has resisted adding observability hooks, preferring instead to spend effort on the "just works" part of the library and/or recommending that library users layer their own observability on top.  But Salt customers continue asking questions like "is Salt dropping events? Is my bus 'overloaded'?  How do I know when I should add another master and split my minions between them?  How can I predict my event bus traffic so I can know that my Salt infrastructure will perform in a crisis?"  In general all we have had to offer them is rules of thumb and estimates.
+4. The ZeroMQ project is lightweight by design and adding observability hooks or durable queues have been out of scope, preferring instead to spend effort on the "just works" part of the library and/or recommending that library users layer their own observability on top.  But Salt customers continue asking questions like "is Salt dropping events? Is my bus 'overloaded'?  How do I know when I should add another master and split my minions between them?  How can I predict my event bus traffic so I can know that my Salt infrastructure will perform in a crisis?"  In general all we have had to offer them is rules of thumb and estimates.
 
 In some cases we can solve these problems by adding additional features inside the Salt codebase.  But other scenarios are impossible without direct transport support.
 
@@ -82,7 +82,9 @@ As part of early PoC efforts we also created Salt engines that bridge the ZeroMQ
 ## Unresolved questions
 [unresolved]: #unresolved-questions
 
-- Discuss auth concerns here?  Where will we keep keys?  Do we need a shared keystore?  How much do we talk about the auth refactor?
+### Minion and Master Keys 
+
+One potential future scenario after pluggable transports are enabled is the ability for minions to "float" freely between a set of masters.  Since multiple masters could theoretically join the same event bus and send commands to all attached minions, we need to address how all those masters will keep their sets of minion keys synchronized as well as how minions will distinguish the different masters.  Currently hot-hot and failover masters are required to share the same public/private key pair and HA master scenario best practices mandate shared filesystems for minion keys.  In an on-prem+cloud+multi availability zone scenario a shared filesystem for minion keys is often infeasible and a security risk.  Changes to key management are not a necessary condition for this SEP to move forward.
 
 # Drawbacks
 [drawbacks]: #drawbacks
