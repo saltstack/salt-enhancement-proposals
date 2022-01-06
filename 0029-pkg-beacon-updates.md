@@ -8,12 +8,12 @@
 [summary]: #summary
 
 Changes to the PKG beacon to fire events when software packages are removed and installed, in addition to when upgrades are available.
-Because of the way beacons work, this change will also require changes to all PKG modules to ensure that there is the option in the form of a keyword argument to pull an updated list of installed packages and bypass the ___context dunder.   By default the list_pkgs functions will still continue to pull a list of installed packages from the context dunder dictionary.
+Because of the way beacons work, this change will also require changes to all PKG modules to ensure that there is the option in the form of a keyword argument to pull an updated list of installed packages and bypass the ___context dunder.   By default the list_pkgs functions will still continue to pull a list of installed packages from the __context__ dunder dictionary.
 
 # Motivation
 [motivation]: #motivation
 
-This change would be an enhancement to the PKG beacon, brining additional functionality.
+This change would be an enhancement to the PKG beacon, bringing additional functionality.
 
 # Design
 [design]: #detailed-design
