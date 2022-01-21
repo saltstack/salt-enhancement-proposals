@@ -7,8 +7,8 @@
 # Summary
 [summary]: #summary
 
-Purpose is to make current salt-minion log configs (for performing log rotation) available on all operating systems. Currently, Windows has two minion configs that set the maz size of the log and set the max number of log files. However, these configs do not apply to other platforms. 
-The work would be to streamline the log rotation by using the most _salty_ features (ie. minion-configs), instead of relying on platform based solutions which may, or may not, be controlled by a different execution/state module, which may, or may not, be updated regularly.
+Purpose is to make current salt-minion log configs (for performing log rotation) available on all operating systems. Currently, Windows has two minion configs that set the max size of the log and set the max number of log files. However, these configs do not apply to other platforms. 
+The work would be to streamline the log rotation by using the most _salty_ features (i.e. minion-configs), instead of relying on platform based solutions which may, or may not, be controlled by a different execution/state module, which may, or may not, be updated regularly.
 
 # Design
 [design]: #detailed-design
