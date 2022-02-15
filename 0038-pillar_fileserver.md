@@ -1,7 +1,7 @@
 - Feature Name: Pillar Fileserver 
 - Start Date: 2022-02-10
 - SEP Status: Draft
-- SEP PR:
+- SEP PR: 38
 - Salt Issue:
 
 # Summary
@@ -32,7 +32,7 @@ Here is a list of bugs/feature requests this would help remove.
 * [#61508](https://github.com/saltstack/salt/issues/61508)
 * [#59443](https://github.com/saltstack/salt/issues/59443) since the render engine is separated from the fetch engine would 
          all true env separation
-* 
+* [#14354](https://github.com/saltstack/salt/issues/14354)
 
 # Design
 [design]: #detailed-design
