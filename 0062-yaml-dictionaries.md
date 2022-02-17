@@ -23,7 +23,7 @@ Many people are embarassed when see that Salt uses arrays to describe key-value 
     - mode: '0644'
     - attrs: i
 ```
-In this structure we are describing key-value structure of arugments to Salt state module,
+In this structure we are describing key-value structure of arguments to Salt state module,
 where keys must be unique, but for some reason we use YAML array instead of dictionary!
 
 So it will be much more convenient to use dictionaries for those structures, like this:
