@@ -1,8 +1,8 @@
 - Feature Name: yaml-dictionaries
 - Start Date: 2022-02-17
 - SEP Status: Draft
-- SEP PR: (leave this empty)
-- Salt Issue: (leave this empty)
+- SEP PR:
+- Salt Issue:
 
 # Summary
 [summary]: #summary
