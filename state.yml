@@ -1,0 +1,49 @@
+---
+name: My Custom State
+version: v2
+engine: yaml
+
+metadata:
+  description: This is a long string with the state description
+  hosts: this is a custom key, the metadata would accept anything.
+
+include_states:
+  - stateA
+  - stateB
+
+spec:
+  - id: my_state_id
+    name: My State String
+    pkg:
+      method: installed
+      attr_key0: attr_value0
+      attr_key1: attr_value1
+
+  - id: my_state_id
+    name: My State String
+    pkg.installed:
+      attr_key0: attr_value0
+      attr_key1: attr_value1
+
+  - id: other_state_id
+    name: My State String
+    module: func="fdsf" name="net-tools" attr="attrvalue"
+
+  - id: other_state_id
+    name: My State String
+    module_name:
+      attr_key0: attr_value0
+      attr_key1: attr_value1
+    when: "grains['os_family'] == 'debian'"
+
+  - id: other_state_id
+    name: My State String
+    pkg.install:
+      name: httpd
+    except: "grains['os_family'] !== 'debian'"
+
+  - id: other_state_id
+    name: My State String
+    pkg.install:
+      - items: "{{ item }}"
+    items: "pillar['myItems']"
