@@ -1,5 +1,5 @@
 - Feature Name: deprecate-dunder-utils
-- Start Date: 20022-06-23
+- Start Date: 2022-06-23
 - SEP Status: Draft
 - SEP PR: (leave this empty)
 - Salt Issue: (leave this empty)
