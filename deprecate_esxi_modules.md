@@ -15,7 +15,7 @@ to using the new VMware extensions.
 [motivation]: #motivation
 
 Given these execution modules currently do not get much attention and all VMware support is currently occurring on
-the VMware extensions. Any functionality currently provided by this modules and not support by VMware extensions,
+the VMware extensions, any functionality currently provided by these modules and not supported by VMware extensions,
 should be added to VMware extensions.
 
 Should have a single point of development for VMware support, which is currently VMware extensions.
