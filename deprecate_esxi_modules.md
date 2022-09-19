@@ -14,7 +14,7 @@ to using the new VMware extensions.
 # Motivation
 [motivation]: #motivation
 
-Given these excution modules currently do not get much attention and all VMware support is currently occuring on
+Given these execution modules currently do not get much attention and all VMware support is currently occurring on
 the VMware extensions. Any functionality currently provided by this modules and not support by VMware extensions,
 should be added to VMware extensions.
 
