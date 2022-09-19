@@ -31,7 +31,7 @@ users to VMware extensions documentation will need to be made.
 ## Alternatives
 [alternatives]: #alternatives
 
-Alternative would be to have leave things as they are leading to confusion as to which execution module to use.
+Alternative would be to leave things as they are leading to confusion as to which execution module to use.
 
 ## Unresolved questions
 [unresolved]: #unresolved-questions
