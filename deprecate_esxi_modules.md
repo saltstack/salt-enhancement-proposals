@@ -46,7 +46,7 @@ should only be an excerise in ensuring no surprises.
 
 Why should we *not* do this?
 
-- Cost of migratign existing Salt installations:
+- Cost of migrating existing Salt installations:
     There will be a cost to migrating existing installations.
         However most of those users are probably VMware customers and there will be a period of time allowing them
         to migrate, and the enhanced and supported features of the VMware extensions should give encouragment to migrate.
