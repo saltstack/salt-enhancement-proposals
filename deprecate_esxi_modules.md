@@ -39,7 +39,7 @@ Alternative would be to leave things as they are leading to confusion as to whic
 What parts of the execution modules for esxi, esxcluster, exsdatacenter and esxvm that are not provided by VMware extensions.
 Requires a search through the more recent VMware releases for features supported, but given that the execution modules for
 esxi, esxcluster, exsdatacenter and esxvm have not had much development since 2016 and only offer basic support, the search
-should only be an excerise in ensuring no surprises.
+should only be an exercise in ensuring no surprises.
 
 # Drawbacks
 [drawbacks]: #drawbacks
