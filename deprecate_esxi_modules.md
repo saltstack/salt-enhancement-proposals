@@ -52,7 +52,7 @@ Why should we *not* do this?
         to migrate, and the enhanced and supported features of the VMware extensions should give encouragment to migrate.
 
  - Documentation for Salt.
-    There will be work in updating the exisitng execution modules for esxi, esxcluster, exsdatacenter and esxvm documentation
+    There will be work in updating the existing execution modules for esxi, esxcluster, exsdatacenter and esxvm documentation
     but it should be trival to add a line of text and a link redirecting users to the VMware extension documentation.
 
 
