@@ -23,6 +23,8 @@ can accomplish this by designating a single version as Long Term Support (LTS).
 A LTS version would be supported with bugfixes and security fixes for a longer
 period of time than our current life cycle allows. I propose a 2 year LTS window.
 
+![Release Timing](diagrams/Salt-Release-Timeline.png)
+
 
 ## Alternatives
 [alternatives]: #alternatives
