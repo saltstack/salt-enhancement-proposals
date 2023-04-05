@@ -1,5 +1,5 @@
 - Start Date: 2022-04-20
-- SEP Status: Draft
+- SEP Status: Final Comment
 - SEP PR: (leave this empty)
 - Salt Issue: (leave this empty)
 
@@ -11,8 +11,8 @@ The core team would like to move to an LTS release strategy
 # Motivation
 [motivation]: #motivation
 
-Our curret release strategy causes us to provide security and bugfixes for as
-many as five versions. Our documented [life cycle](https://saltproject.io/salt-platform-support/) has become less
+Our current release strategy causes us to provide security and bugfixes for as
+many as five versions. Our documented [life cycle](https://docs.saltproject.io/salt/install-guide/en/latest/topics/salt-version-support-lifecycle.html#salt-version-support-lifecycle) has become less
 sustainable as we've increased the frequency of releasing new versions of Salt.
 
 # Design
@@ -27,7 +27,7 @@ period of time than our current life cycle allows. I propose a 2 year LTS window
 ## Alternatives
 [alternatives]: #alternatives
 
-Change the current life cycle to provide support for less versions and/or for a shorter durration per version.
+Change the current life cycle to provide support for less versions and/or for a shorter duration per version.
 
 ## Unresolved questions
 [unresolved]: #unresolved-questions
