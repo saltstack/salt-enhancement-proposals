@@ -1,8 +1,8 @@
 - Feature Name: Expose utility functions to states, but not to the CLI or template context
 - Start Date: 2023-06-06
 - SEP Status: Draft
-- SEP PR:
-- Salt Issue:
+- SEP PR: https://github.com/saltstack/salt-enhancement-proposals/pull/70
+- Salt Issue: https://github.com/saltstack/salt/pull/64287#pullrequestreview-1451646261
 
 # Summary
 [summary]: #summary
