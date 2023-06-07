@@ -124,7 +124,7 @@ another.
 
 - For [Option 1](#option-1-augmentation-of-lazyloader), this means that
   `states` loader instances would no longer be re-using the existing
-  `minion_mods` loader instance that is used by the CLI and tempalte context,
+  `minion_mods` loader instance that is used by the CLI and template context,
   and would need to generate its own to use as its `__salt__` dunder. The
   performance impact of this should be minimal, however.
 
