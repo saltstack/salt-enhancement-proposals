@@ -55,7 +55,6 @@ exposing dubiously-useful functions to the CLI and template context.
 [design]: #detailed-design
 
 ## Option 1: Augmentation of LazyLoader
-[option-1]: #option-1
 
 An optional module-level dunder could be added to remote-execution modules, to
 suppress availability of utility functions. For example:
@@ -72,11 +71,10 @@ utility functions, while the CLI and template context get a copy with them
 absent, preventing them from being exposed to end users.
 
 ## Option 2: Move the utility functions to a new loader type
-[option-2]: #option-2
 
 This solution is far less elegant and more intrusive, but I'm including it as
 an alternative. It was my first idea for solving this problem, but I believe
-that [Option 1](#option-1) is the superior solution.
+that [Option 1](#option-1-augmentation-of-lazyloader) is the superior solution.
 
 Utility functions would be moved to a different module, which would be in a
 directory processed by a loader instance. That loader would be added to the
@@ -107,23 +105,26 @@ another.
 ## Unresolved questions
 [unresolved]: #unresolved-questions
 
-- For [Option 1](#option-1), Salt once had a test which parsed all docstrings
-  in every execution module, ensuring that CLI examples were included. I'm not
-  sure if this test still exists, but utility functions would not need CLI
-  examples and this test case (if still present) would need to be updated to
-  account for this fact.
+- For [Option 1](#option-1-augmentation-of-lazyloader), Salt once had a test
+  which parsed all docstrings in every execution module, ensuring that CLI
+  examples were included. I'm not sure if this test still exists, but utility
+  functions would not need CLI examples and this test case (if still present)
+  would need to be updated to account for this fact.
 
-- As noted above for [Option 2](#option-2), with the fate of `__utils__` in
-  question, the actual name of the hypothetical loader type is unknown.
+- As noted above for [Option
+  2](#option-2-move-the-utility-functions-to-a-new-loader-type), with the fate
+  of `__utils__` in question, the actual name of the hypothetical loader type
+  is unknown.
 
 # Drawbacks
 [drawbacks]: #drawbacks
 
-- For [Option 1](#option-1), this means that `states` loader instances would no
-  longer be re-using the existing `minion_mods` loader instance that is used by
-  the CLI and tempalte context, and would need to generate its own to use as
-  its `__salt__` dunder. The performance impact of this should be minimal,
-  however.
+- For [Option 1](#option-1-augmentation-of-lazyloader), this means that
+  `states` loader instances would no longer be re-using the existing
+  `minion_mods` loader instance that is used by the CLI and tempalte context,
+  and would need to generate its own to use as its `__salt__` dunder. The
+  performance impact of this should be minimal, however.
 
-- For [Option 2](#option-2), adding a new loader type is a non-trivial
-  undertaking, so this would be a much less-attractive solution.
+- For [Option 2](#option-2-move-the-utility-functions-to-a-new-loader-type),
+  adding a new loader type is a non-trivial undertaking, so this would be a
+  much less-attractive solution.
