@@ -13,9 +13,9 @@ being added to the CLI or template context.
 # Motivation
 [motivation]: #motivation
 
-It is a policy of the Salt core team not to add any new functions to the
-`__salt__` loader (thus exposing them to the Salt CLI and the template
-context).  The core team's proposed alternative, however, is to do an OS check
+It is a policy of the Salt core team not to add any new utility functions to
+the `__salt__` loader (thus exposing them to the Salt CLI and the template
+context). The core team's proposed alternative, however, is to do an OS check
 in the state module, then a late import of the salt execution module, and
 finally to invoke the utility function directly. While this option technically
 works, it is unequivocally a bad idea, with several complications:
