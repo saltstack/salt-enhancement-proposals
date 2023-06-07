@@ -111,6 +111,9 @@ another.
   functions would not need CLI examples and this test case (if still present)
   would need to be updated to account for this fact.
 
+- Also for [Option 1](#option-1-augmentation-of-lazyloader), we may need to add
+  something to prevent Sphinx from including utility functions in the docs.
+
 - As noted above for [Option
   2](#option-2-move-the-utility-functions-to-a-new-loader-type), with the fate
   of `__utils__` in question, the actual name of the hypothetical loader type
