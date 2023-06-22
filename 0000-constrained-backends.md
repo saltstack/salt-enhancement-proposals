@@ -29,12 +29,12 @@ with the product to understand, and for somebody familiar with the internals to 
 - Definition of any new terminology
   - "foreign" backend: a backend that can be modified by other users than the salt master administrator.
 - Examples of how the feature is used:
-      * Target minions on backends
+      - Target minions on backends
         Users able to change webserver.git aren't always the same users that should be able to modify backupservers.
-      * Apply these states constrained to be applied as user x.
-        * This and more could be accomplished by forcing a render pipeline, that acts as gateway that applies or filters wrapping the renderers with another renderer, that applies/filters parts. Or simply raise an exception to stop further processing of a configuration state.
-      * Allow just a certain list of renderers.
-         * Some renderers  (like py) might have more capabilities than others to try to circumvent pillar scopes.
+      - Apply these states constrained to be applied as user x.
+        - This and more could be accomplished by forcing a render pipeline, that acts as gateway that applies or filters wrapping the renderers with another renderer, that applies/filters parts. Or simply raise an exception to stop further processing of a configuration state.
+      - Allow just a certain list of renderers.
+         - Some renderers  (like py) might have more capabilities than others to try to circumvent pillar scopes.
 
 
       ```
@@ -56,10 +56,10 @@ with the product to understand, and for somebody familiar with the internals to 
                     - target: backup\*
       ```
   
-      The last part, is still unpolished:
+  The last part, is still unpolished:
       * Render (some) state files in a sandbox.
          * Rendering itself can be harmful on the salt master, as the renderer (for example: py) might get access to data / pillars that is not in scope for the targeted minion. Restricting the information that is available.
-         ```
+  ```
                 gitfs_remotes:
                   - https://foo.com/main.git
                   - https://foo.com/webserver.git:
@@ -67,7 +67,7 @@ with the product to understand, and for somebody familiar with the internals to 
                       -  py
                     - renderer-sandbox:
                       - ## TODO: syntax for passing scoped pillar data ##
-      ```
+  ```
 
 - Outline of a test plan for this feature. How do you plan to test it? Can it be automated?
   - Create multiple repositories and check if they had an effect on other minions than targeted.
