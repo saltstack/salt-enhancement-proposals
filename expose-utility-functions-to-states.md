@@ -70,6 +70,10 @@ its own copy of the `minion_mods` loader that contains the utility functions,
 while the CLI and template context get a copy with them absent, preventing them
 from being exposed to end users.
 
+See
+[here](https://github.com/saltstack/salt-enhancement-proposals/pull/70#issuecomment-1625554331)
+for a patch that implements this.
+
 ## Option 2: Move the utility functions to a new loader type
 
 This solution is far less elegant and more intrusive, but I'm including it as
