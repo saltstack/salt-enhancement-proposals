@@ -60,15 +60,15 @@ An optional module-level dunder could be added to remote-execution modules, to
 suppress availability of utility functions. For example:
 
 ```python
-__utility_funcs__ = ('foo', 'bar')
+__utility_funcs__ = ('_foo', '_bar')
 ```
 
-Any function name found in `__utility_funcs__` would be ignored by the loader
-by default, but they could be conditionally loaded by passing an argument when
-instantiating the `LazyLoader` class. This would allow `salt.loader.states()`
-to instantiate its own copy of the `minion_mods` loader that contains the
-utility functions, while the CLI and template context get a copy with them
-absent, preventing them from being exposed to end users.
+This dunder would be used to specify private utility functions which can
+conditionally be added to the loader by passing an argument when instantiating
+the `LazyLoader` class. This would allow `salt.loader.states()` to instantiate
+its own copy of the `minion_mods` loader that contains the utility functions,
+while the CLI and template context get a copy with them absent, preventing them
+from being exposed to end users.
 
 ## Option 2: Move the utility functions to a new loader type
 
@@ -104,15 +104,6 @@ another.
 
 ## Unresolved questions
 [unresolved]: #unresolved-questions
-
-- For [Option 1](#option-1-augmentation-of-lazyloader), Salt once had a test
-  which parsed all docstrings in every execution module, ensuring that CLI
-  examples were included. I'm not sure if this test still exists, but utility
-  functions would not need CLI examples and this test case (if still present)
-  would need to be updated to account for this fact.
-
-- Also for [Option 1](#option-1-augmentation-of-lazyloader), we may need to add
-  something to prevent Sphinx from including utility functions in the docs.
 
 - As noted above for [Option
   2](#option-2-move-the-utility-functions-to-a-new-loader-type), with the fate
