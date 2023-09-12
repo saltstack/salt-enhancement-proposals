@@ -56,6 +56,11 @@ Jobs can come and go through all the masters in our master pool. From a minion's
 
 <img src='/diagrams/000-cluster-arch.png' width='400px'>
 
+
+Events from master's including job returns are sent to all masters in the cluster. This requires that all masters run on stable local network.
+
+<img src="/diagrams/000-master-event-bus.png" width="400px">
+
 > [!IMPORTANT]
 > The current work for this SEP can be found [here](https://github.com/saltstack/salt/pull/64936)
 
@@ -64,7 +69,8 @@ Jobs can come and go through all the masters in our master pool. From a minion's
 [alternatives]: #alternatives
 
 We currently have two alternatives to achieve "high availablity". This is a
-third, more robust approach that alleviates the issues with the current options.
+third, more robust approach that alleviates the issues with the current
+options. This is not intending to deprecate the current HA functionality.
 
 
 ## Unresolved questions
