@@ -64,7 +64,15 @@ Events from master's including job returns are sent to all masters in the cluste
 > [!IMPORTANT]
 > The current work for this SEP can be found [here](https://github.com/saltstack/salt/pull/64936)
 
+### Cluster communication
 
+Each master in a cluster will retain it's own public/private keypair as well as it's own aes session key stored in memory on the master. In addition, a new `cluster_pki_dir` configuration options is added. The cluster will maintin a cluster wide public/private keypair and a cluster wide aes session key which will be used for minion communication. Each master in the cluster will publish a copy of it's public key in `<cluster_pki_dir>/peers`. Minion public keys will also be stored in `cluster_pki_dir` when in cluster mode. The same code use for master/minion configuration can be used to secure the master event bus.
+
+Master event bus communications will be secured using each masters' own keypair and aes sessions. There will be an addition of a new Channel `salt.channels.server` to handle the additional communications logic while leveraging our existing generic transports. This will also allow a cluster to leverage new transport (rabbitmq) or additional functionality (client tls certificates) as those feature become available.
+ 
+Communictiona with the minions connected to the cluster are secured with the cluster wide key pair and aes session key.
+
+ 
 ## Alternatives
 [alternatives]: #alternatives
 
