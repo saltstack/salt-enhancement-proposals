@@ -1,5 +1,33 @@
 # Salt Enhancement Proposals
 
+## Deprecation of SEP Process
+In 2019 we decided to create a community process to discuss and review
+Salt Enhancements. Unfortunately I feel that this process has not proven
+to be an effective way to solve the core issues around Salt Enhancements.
+Overall the Salt enhancement process has proven itself to be more of a
+burden than an accelerant to Salt stability, security, and progress.
+As such, I feel that the current optimal course of action is to shut
+the process down.
+
+Instead of the Salt Enhancement Proposal process we will add a time
+in the Open Hour for people to present ideas and concepts to better
+understand if they are worth their effort to develop. Extensive
+documentation around more intrusive or involved enhancements should
+be included in PRs.
+
+By migrating the conversation into the PR process we ensure that
+we are only reviewing viable proposals instead of being burdened
+with requests that the core team is expected to fulfill.
+
+Conversations about enhancements can also be held in the discussions
+tab in GitHub.
+
+Effective immediately (01/24/2024) we will be archiving and freezing
+the SEP repo.
+
+-Thomas S Hatch, creator and founder of Salt Project
+
+# README Retaind for Archive
 Many changes, including bug fixes and documentation improvements, can be
 implemented and reviewed via the normal GitHub pull request workflow.
 
